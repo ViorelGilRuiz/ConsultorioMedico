@@ -233,12 +233,12 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
     }//GEN-LAST:event_botonPacientesActionPerformed
 
     private void botonEnfermeriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEnfermeriaActionPerformed
-       EnfermeriaVgil enfermeria = new EnfermeriaVgil(this, rootPaneCheckingEnabled);
+       EnfermeriaVgil enfermeria = new EnfermeriaVgil();
        enfermeria.setVisible(true);
     }//GEN-LAST:event_botonEnfermeriaActionPerformed
 
     private void botonPersonalMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonalMedicoActionPerformed
-       MedicoVgil medico = new MedicoVgil(this, rootPaneCheckingEnabled);
+       MedicoVgil medico = new MedicoVgil();
        medico.setVisible(true);
     }//GEN-LAST:event_botonPersonalMedicoActionPerformed
 
