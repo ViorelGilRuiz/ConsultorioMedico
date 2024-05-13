@@ -15,7 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class EncriptadoVgil {
     
-    private static final String MILLAVE = "2024tareadam2024";
+    private static final String MILLAVE = "vJMnURwFuojTiaJT";
 
     public static String encriptar(String textoEncriptar) throws Exception {
 

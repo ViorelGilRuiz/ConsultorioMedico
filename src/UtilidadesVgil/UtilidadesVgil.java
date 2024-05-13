@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package UtilidadesVgil;
+import bbddVgil.ConexionVgil;
+import static bbddVgil.ConexionVgil.conn;
 
 import java.awt.Component;
 import java.sql.PreparedStatement;
@@ -117,7 +119,7 @@ public class UtilidadesVgil {
             return rs.next();
 
         } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

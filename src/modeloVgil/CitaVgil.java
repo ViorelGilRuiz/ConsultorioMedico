@@ -4,10 +4,17 @@
  */
 package modeloVgil;
 
+import java.util.Date;
+
 /**
  *
  * @author oceans
  */
 public class CitaVgil {
+    
+    String dniPaciente;
+    String nombre;
+    Date dia;
+    double hora;
     
 }
