@@ -12,144 +12,145 @@ import java.util.Date;
  */
 public class PacienteVgil {
 
-    public PacienteVgil(String dni, String nombre, String apellidos, Date fechaNacimiento, int telefono, String email, int cp, String sexo, String tabaquismo, String consumoalchol, String antecedentesSalud, String datosSaludGeneral, Date fechaRegistro) {
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
-        this.telefono = telefono;
-        this.email = email;
-        this.cp = cp;
-        this.sexo = sexo;
-        this.tabaquismo = tabaquismo;
-        this.consumoalchol = consumoalchol;
-        this.antecedentesSalud = antecedentesSalud;
-        this.datosSaludGeneral = datosSaludGeneral;
-        this.fechaRegistro = fechaRegistro;
+    public PacienteVgil(String dniVgil, String nombreVgil, String apellidosVgil, Date fechaNacimientoVgil, int telefonoVgil, String emailVgil, int cpVgil, String sexoVgil, String tabaquismoVgil, String consumoalcholVgil, String antecedentesSaludVgil, String datosSaludGeneralVgil, Date fechaRegistroVgil) {
+        this.dniVgil = dniVgil;
+        this.nombreVgil = nombreVgil;
+        this.apellidosVgil = apellidosVgil;
+        this.fechaNacimientoVgil = fechaNacimientoVgil;
+        this.telefonoVgil = telefonoVgil;
+        this.emailVgil = emailVgil;
+        this.cpVgil = cpVgil;
+        this.sexoVgil = sexoVgil;
+        this.tabaquismoVgil = tabaquismoVgil;
+        this.consumoalcholVgil = consumoalcholVgil;
+        this.antecedentesSaludVgil = antecedentesSaludVgil;
+        this.datosSaludGeneralVgil = datosSaludGeneralVgil;
+        this.fechaRegistroVgil = fechaRegistroVgil;
     }
 
-    public String getDni() {
-        return dni;
+    public String getDniVgil() {
+        return dniVgil;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
+    public void setDniVgil(String dniVgil) {
+        this.dniVgil = dniVgil;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreVgil() {
+        return nombreVgil;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreVgil(String nombreVgil) {
+        this.nombreVgil = nombreVgil;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellidosVgil() {
+        return apellidosVgil;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellidosVgil(String apellidosVgil) {
+        this.apellidosVgil = apellidosVgil;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public Date getFechaNacimientoVgil() {
+        return fechaNacimientoVgil;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFechaNacimientoVgil(Date fechaNacimientoVgil) {
+        this.fechaNacimientoVgil = fechaNacimientoVgil;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public int getTelefonoVgil() {
+        return telefonoVgil;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setTelefonoVgil(int telefonoVgil) {
+        this.telefonoVgil = telefonoVgil;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailVgil() {
+        return emailVgil;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailVgil(String emailVgil) {
+        this.emailVgil = emailVgil;
     }
 
-    public int getCp() {
-        return cp;
+    public int getCpVgil() {
+        return cpVgil;
     }
 
-    public void setCp(int cp) {
-        this.cp = cp;
+    public void setCpVgil(int cpVgil) {
+        this.cpVgil = cpVgil;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getSexoVgil() {
+        return sexoVgil;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setSexoVgil(String sexoVgil) {
+        this.sexoVgil = sexoVgil;
     }
 
-    public String getTabaquismo() {
-        return tabaquismo;
+    public String getTabaquismoVgil() {
+        return tabaquismoVgil;
     }
 
-    public void setTabaquismo(String tabaquismo) {
-        this.tabaquismo = tabaquismo;
+    public void setTabaquismoVgil(String tabaquismoVgil) {
+        this.tabaquismoVgil = tabaquismoVgil;
     }
 
-    public String getConsumoalchol() {
-        return consumoalchol;
+    public String getConsumoalcholVgil() {
+        return consumoalcholVgil;
     }
 
-    public void setConsumoalchol(String consumoalchol) {
-        this.consumoalchol = consumoalchol;
+    public void setConsumoalcholVgil(String consumoalcholVgil) {
+        this.consumoalcholVgil = consumoalcholVgil;
     }
 
-    public String getAntecedentesSalud() {
-        return antecedentesSalud;
+    public String getAntecedentesSaludVgil() {
+        return antecedentesSaludVgil;
     }
 
-    public void setAntecedentesSalud(String antecedentesSalud) {
-        this.antecedentesSalud = antecedentesSalud;
+    public void setAntecedentesSaludVgil(String antecedentesSaludVgil) {
+        this.antecedentesSaludVgil = antecedentesSaludVgil;
     }
 
-    public String getDatosSaludGeneral() {
-        return datosSaludGeneral;
+    public String getDatosSaludGeneralVgil() {
+        return datosSaludGeneralVgil;
     }
 
-    public void setDatosSaludGeneral(String datosSaludGeneral) {
-        this.datosSaludGeneral = datosSaludGeneral;
+    public void setDatosSaludGeneralVgil(String datosSaludGeneralVgil) {
+        this.datosSaludGeneralVgil = datosSaludGeneralVgil;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
+    public Date getFechaRegistroVgil() {
+        return fechaRegistroVgil;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setFechaRegistroVgil(Date fechaRegistroVgil) {
+        this.fechaRegistroVgil = fechaRegistroVgil;
     }
 
     @Override
     public String toString() {
-        return "PacienteVgil{" + "dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNacimiento=" + fechaNacimiento + ", telefono=" + telefono + ", email=" + email + ", cp=" + cp + ", sexo=" + sexo + ", tabaquismo=" + tabaquismo + ", consumoalchol=" + consumoalchol + ", antecedentesSalud=" + antecedentesSalud + ", datosSaludGeneral=" + datosSaludGeneral + ", fechaRegistro=" + fechaRegistro + '}';
+        return "PacienteVgil{" + "dniVgil=" + dniVgil + ", nombreVgil=" + nombreVgil + ", apellidosVgil=" + apellidosVgil + ", fechaNacimientoVgil=" + fechaNacimientoVgil + ", telefonoVgil=" + telefonoVgil + ", emailVgil=" + emailVgil + ", cpVgil=" + cpVgil + ", sexoVgil=" + sexoVgil + ", tabaquismoVgil=" + tabaquismoVgil + ", consumoalcholVgil=" + consumoalcholVgil + ", antecedentesSaludVgil=" + antecedentesSaludVgil + ", datosSaludGeneralVgil=" + datosSaludGeneralVgil + ", fechaRegistroVgil=" + fechaRegistroVgil + '}';
     }
+
     
-    private String dni;
-    private String nombre;
-    private String apellidos;
-    private Date fechaNacimiento;
-    private int telefono;
-    private String email;
-    private int cp;
-    private String sexo;
-    private String tabaquismo;
-    private String consumoalchol;
-    private String antecedentesSalud;
-    private String datosSaludGeneral;
-    private Date fechaRegistro;
+    private String dniVgil;
+    private String nombreVgil;
+    private String apellidosVgil;
+    private Date fechaNacimientoVgil;
+    private int telefonoVgil;
+    private String emailVgil;
+    private int cpVgil;
+    private String sexoVgil;
+    private String tabaquismoVgil;
+    private String consumoalcholVgil;
+    private String antecedentesSaludVgil;
+    private String datosSaludGeneralVgil;
+    private Date fechaRegistroVgil;
     
 }
 

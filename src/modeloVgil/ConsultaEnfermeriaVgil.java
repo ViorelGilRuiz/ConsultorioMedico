@@ -12,82 +12,83 @@ import java.util.Date;
  */
 public class ConsultaEnfermeriaVgil {
 
-    public ConsultaEnfermeriaVgil(String dniPaciente, Date fechaConsulta, double maxima, double minima, int glucosa, double peso, int codigoFacultativo) {
-        this.dniPaciente = dniPaciente;
-        this.fechaConsulta = fechaConsulta;
-        this.maxima = maxima;
-        this.minima = minima;
-        this.glucosa = glucosa;
-        this.peso = peso;
-        this.codigoFacultativo = codigoFacultativo;
+    public ConsultaEnfermeriaVgil(String dniPacienteVgil, Date fechaConsultaVgil, double maximaVgil, double minimaVgil, int glucosaVgil, double pesoVgil, int codigoFacultativoVgil) {
+        this.dniPacienteVgil = dniPacienteVgil;
+        this.fechaConsultaVgil = fechaConsultaVgil;
+        this.maximaVgil = maximaVgil;
+        this.minimaVgil = minimaVgil;
+        this.glucosaVgil = glucosaVgil;
+        this.pesoVgil = pesoVgil;
+        this.codigoFacultativoVgil = codigoFacultativoVgil;
     }
 
-    public String getDniPaciente() {
-        return dniPaciente;
+    public String getDniPacienteVgil() {
+        return dniPacienteVgil;
     }
 
-    public void setDniPaciente(String dniPaciente) {
-        this.dniPaciente = dniPaciente;
+    public void setDniPacienteVgil(String dniPacienteVgil) {
+        this.dniPacienteVgil = dniPacienteVgil;
     }
 
-    public Date getFechaConsulta() {
-        return fechaConsulta;
+    public Date getFechaConsultaVgil() {
+        return fechaConsultaVgil;
     }
 
-    public void setFechaConsulta(Date fechaConsulta) {
-        this.fechaConsulta = fechaConsulta;
+    public void setFechaConsultaVgil(Date fechaConsultaVgil) {
+        this.fechaConsultaVgil = fechaConsultaVgil;
     }
 
-    public double getMaxima() {
-        return maxima;
+    public double getMaximaVgil() {
+        return maximaVgil;
     }
 
-    public void setMaxima(double maxima) {
-        this.maxima = maxima;
+    public void setMaximaVgil(double maximaVgil) {
+        this.maximaVgil = maximaVgil;
     }
 
-    public double getMinima() {
-        return minima;
+    public double getMinimaVgil() {
+        return minimaVgil;
     }
 
-    public void setMinima(double minima) {
-        this.minima = minima;
+    public void setMinimaVgil(double minimaVgil) {
+        this.minimaVgil = minimaVgil;
     }
 
-    public int getGlucosa() {
-        return glucosa;
+    public int getGlucosaVgil() {
+        return glucosaVgil;
     }
 
-    public void setGlucosa(int glucosa) {
-        this.glucosa = glucosa;
+    public void setGlucosaVgil(int glucosaVgil) {
+        this.glucosaVgil = glucosaVgil;
     }
 
-    public double getPeso() {
-        return peso;
+    public double getPesoVgil() {
+        return pesoVgil;
     }
 
-    public void setPeso(double peso) {
-        this.peso = peso;
+    public void setPesoVgil(double pesoVgil) {
+        this.pesoVgil = pesoVgil;
     }
 
-    public int getCodigoFacultativo() {
-        return codigoFacultativo;
+    public int getCodigoFacultativoVgil() {
+        return codigoFacultativoVgil;
     }
 
-    public void setCodigoFacultativo(int codigoFacultativo) {
-        this.codigoFacultativo = codigoFacultativo;
+    public void setCodigoFacultativoVgil(int codigoFacultativoVgil) {
+        this.codigoFacultativoVgil = codigoFacultativoVgil;
     }
 
     @Override
     public String toString() {
-        return "ConsultaEnfermeriaVgil{" + "dniPaciente=" + dniPaciente + ", fechaConsulta=" + fechaConsulta + ", maxima=" + maxima + ", minima=" + minima + ", glucosa=" + glucosa + ", peso=" + peso + ", codigoFacultativo=" + codigoFacultativo + '}';
+        return "ConsultaEnfermeriaVgil{" + "dniPacienteVgil=" + dniPacienteVgil + ", fechaConsultaVgil=" + fechaConsultaVgil + ", maximaVgil=" + maximaVgil + ", minimaVgil=" + minimaVgil + ", glucosaVgil=" + glucosaVgil + ", pesoVgil=" + pesoVgil + ", codigoFacultativoVgil=" + codigoFacultativoVgil + '}';
     }
-    
-    String dniPaciente;
-    Date fechaConsulta;
-    double maxima, minima;
-    int glucosa;
-    double peso;
-    int codigoFacultativo;
+
+   
+    String dniPacienteVgil;
+    Date fechaConsultaVgil;
+    double maximaVgil, minimaVgil;
+    int glucosaVgil;
+    double pesoVgil;
+    int codigoFacultativoVgil;
     
 }

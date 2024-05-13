@@ -223,8 +223,8 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultasActionPerformed
-      NuevaCitaVgil nuevaCita = new NuevaCitaVgil(this, rootPaneCheckingEnabled);
-      nuevaCita.setVisible(true);
+    MedicoVgil medico = new MedicoVgil();
+    medico.setVisible(true);
     }//GEN-LAST:event_botonConsultasActionPerformed
 
     private void botonPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPacientesActionPerformed

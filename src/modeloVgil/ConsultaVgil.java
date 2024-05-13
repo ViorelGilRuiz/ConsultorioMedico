@@ -12,72 +12,74 @@ import java.util.Date;
  */
 public class ConsultaVgil {
 
-    public ConsultaVgil(String dniPaciente, Date fechaConsulta, String diagnostico, String tratamiento, String observaciones, int codigoFacultativo) {
-        this.dniPaciente = dniPaciente;
-        this.fechaConsulta = fechaConsulta;
-        this.diagnostico = diagnostico;
-        this.tratamiento = tratamiento;
-        this.observaciones = observaciones;
-        this.codigoFacultativo = codigoFacultativo;
+    public ConsultaVgil(String dniPacienteVgil, Date fechaConsultaVgil, String diagnosticoVgil, String tratamientoVgil, String observacionesVgil, int codigoFacultativoVgil) {
+        this.dniPacienteVgil = dniPacienteVgil;
+        this.fechaConsultaVgil = fechaConsultaVgil;
+        this.diagnosticoVgil = diagnosticoVgil;
+        this.tratamientoVgil = tratamientoVgil;
+        this.observacionesVgil = observacionesVgil;
+        this.codigoFacultativoVgil = codigoFacultativoVgil;
     }
 
-    public String getDniPaciente() {
-        return dniPaciente;
+    public String getDniPacienteVgil() {
+        return dniPacienteVgil;
     }
 
-    public void setDniPaciente(String dniPaciente) {
-        this.dniPaciente = dniPaciente;
+    public void setDniPacienteVgil(String dniPacienteVgil) {
+        this.dniPacienteVgil = dniPacienteVgil;
     }
 
-    public Date getFechaConsulta() {
-        return fechaConsulta;
+    public Date getFechaConsultaVgil() {
+        return fechaConsultaVgil;
     }
 
-    public void setFechaConsulta(Date fechaConsulta) {
-        this.fechaConsulta = fechaConsulta;
+    public void setFechaConsultaVgil(Date fechaConsultaVgil) {
+        this.fechaConsultaVgil = fechaConsultaVgil;
     }
 
-    public String getDiagnostico() {
-        return diagnostico;
+    public String getDiagnosticoVgil() {
+        return diagnosticoVgil;
     }
 
-    public void setDiagnostico(String diagnostico) {
-        this.diagnostico = diagnostico;
+    public void setDiagnosticoVgil(String diagnosticoVgil) {
+        this.diagnosticoVgil = diagnosticoVgil;
     }
 
-    public String getTratamiento() {
-        return tratamiento;
+    public String getTratamientoVgil() {
+        return tratamientoVgil;
     }
 
-    public void setTratamiento(String tratamiento) {
-        this.tratamiento = tratamiento;
+    public void setTratamientoVgil(String tratamientoVgil) {
+        this.tratamientoVgil = tratamientoVgil;
     }
 
-    public String getObservaciones() {
-        return observaciones;
+    public String getObservacionesVgil() {
+        return observacionesVgil;
     }
 
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
+    public void setObservacionesVgil(String observacionesVgil) {
+        this.observacionesVgil = observacionesVgil;
     }
 
-    public int getCodigoFacultativo() {
-        return codigoFacultativo;
+    public int getCodigoFacultativoVgil() {
+        return codigoFacultativoVgil;
     }
 
-    public void setCodigoFacultativo(int codigoFacultativo) {
-        this.codigoFacultativo = codigoFacultativo;
+    public void setCodigoFacultativoVgil(int codigoFacultativoVgil) {
+        this.codigoFacultativoVgil = codigoFacultativoVgil;
     }
 
     @Override
     public String toString() {
-        return "ConsultaVgil{" + "dniPaciente=" + dniPaciente + ", fechaConsulta=" + fechaConsulta + ", diagnostico=" + diagnostico + ", tratamiento=" + tratamiento + ", observaciones=" + observaciones + ", codigoFacultativo=" + codigoFacultativo + '}';
+        return "ConsultaVgil{" + "dniPacienteVgil=" + dniPacienteVgil + ", fechaConsultaVgil=" + fechaConsultaVgil + ", diagnosticoVgil=" + diagnosticoVgil + ", tratamientoVgil=" + tratamientoVgil + ", observacionesVgil=" + observacionesVgil + ", codigoFacultativoVgil=" + codigoFacultativoVgil + '}';
     }
-    private String dniPaciente;
-    private Date fechaConsulta;
-    private String diagnostico;
-    private String tratamiento;
-    private String observaciones;
-    private int codigoFacultativo;
+
+
+    private String dniPacienteVgil;
+    private Date fechaConsultaVgil;
+    private String diagnosticoVgil;
+    private String tratamientoVgil;
+    private String observacionesVgil;
+    private int codigoFacultativoVgil;
     
 }
