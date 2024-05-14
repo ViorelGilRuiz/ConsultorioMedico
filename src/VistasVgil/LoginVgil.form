@@ -108,7 +108,7 @@
                               <Component id="campoUsuario" max="32767" attributes="0"/>
                               <Component id="campoContraseña" pref="109" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="118" max="32767" attributes="0"/>
+                          <EmptySpace pref="119" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>

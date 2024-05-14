@@ -5,7 +5,6 @@
 package UtilidadesVgil;
 import bbddVgil.ConexionVgil;
 import static bbddVgil.ConexionVgil.conn;
-
 import java.awt.Component;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ import javax.swing.JTextField;
  * @author oceans
  */
 public class UtilidadesVgil {
-     public static boolean validacionLetraDni(String dni) {
+     public static boolean validacionLetraDni_Vgil(String dni) {
 
         String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         String numeroDni = dni.substring(0, 8);
@@ -33,16 +32,16 @@ public class UtilidadesVgil {
 
     }
 
-    public static boolean campoVacio(JTextField campo) {
+    public static boolean campoVacio_Vgil(JTextField campo) {
         return campo.getText().isBlank();
     }
 
-    public static boolean lanzaAlertaCampoVacio(JTextField campo) {
+    public static boolean lanzaAlertaCampoVacio_Vgil(JTextField campo) {
         JOptionPane.showMessageDialog(null, "El campo " + campo.getName() + " es obligatorio");
         return false;
     }
 
-    public static boolean confirmaacionDNI(JTextField campo) {
+    public static boolean confirmaacionDNI_Vgil(JTextField campo) {
 
         String patDni = "^[0-9]{8}[A-Z]{1}$";
 
@@ -50,7 +49,7 @@ public class UtilidadesVgil {
 
     }
 
-    public static boolean validacionLetra(String dni) {
+    public static boolean validacionLetra_Vgil(String dni) {
         String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         String numeroDni = dni.substring(0, 8);
         char letraDni = dni.charAt(8);
@@ -61,23 +60,23 @@ public class UtilidadesVgil {
 
     }
 
-    public static boolean validaciontelefonofijo(String telefono) {
+    public static boolean validaciontelefonofijo_Vgil(String telefono) {
         String patrontelefonofijo = "^[9,8]{1}[0-8]{1}[0-9]{7}$";
         return telefono.matches(patrontelefonofijo);
 
     }
 
-    public static boolean rangotel(int tefn) {
+    public static boolean rangotel_Vgil(int tefn) {
         return tefn <= 988999999;
 
     }
 
-    public static boolean LazarAlertaCampoNumerico(Component c, JTextField campo) {
+    public static boolean LazarAlertaCampoNumerico_Vgil(Component c, JTextField campo) {
         JOptionPane.showMessageDialog(c, "El campo" + campo.getName() + "solo admite numeros");
         return false;
     }
 
-    public static boolean enteroCorrecto(JTextField campo) {
+    public static boolean enteroCorrecto_Vgil(JTextField campo) {
         try {
             String texto = campo.getText();
 
@@ -93,18 +92,18 @@ public class UtilidadesVgil {
         return false;
     }
     
-    public static boolean comboNoSeleccionado (JComboBox combo) {
+    public static boolean comboNoSeleccionado_Vgil (JComboBox combo) {
         return combo.getSelectedIndex() == 0;
     }
     
-    public static void alertaComboNoSeleccionado (Component padre, JComboBox combo) {
+    public static void alertaComboNoSeleccionado_Vgil (Component padre, JComboBox combo) {
         JOptionPane.showMessageDialog(padre, "Debes seleccionar un elemento del campo " + combo.getName());
 }
 
-    public static void limpiarcampos() {
+    public static void limpiarcampos_Vgil() {
 
 }
-    public static boolean comprobarDni(String campo) {
+    public static boolean comprobarDni_Vgil(String campo) {
 
         try {
             String consulta = "SELECT dniCliente from clientes where dniCliente =?";

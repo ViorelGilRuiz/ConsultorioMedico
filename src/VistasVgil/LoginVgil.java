@@ -4,6 +4,13 @@
  */
 package VistasVgil;
 
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import UtilidadesVgil.EncriptadoVgil;
+import bbddVgil.ConexionVgil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author oceans
@@ -150,8 +157,8 @@ public class LoginVgil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       MenuPrincipalVgil menuPrincipal = new MenuPrincipalVgil();
-       menuPrincipal.setVisible(true);
+        MenuPrincipalVgil menuPrincipal = new MenuPrincipalVgil();
+        menuPrincipal.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -201,4 +208,37 @@ public class LoginVgil extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
+
+    String usuario;
+    String contrasenya;
+    public static String[] datosPersona_Vgil;
+
+    public void acceso_Vgil() throws SQLException {
+        try {
+            usuario = campoUsuario.getText();
+            contrasenya = new String(campoContraseña.getPassword());
+            String passencript = null;
+            
+            passencript = EncriptadoVgil.encriptar_Vgil(contrasenya);
+            
+            
+            ConexionVgil.conectar_Vgil();
+            {
+                if (ConexionVgil.acceder_Vgil(usuario, passencript)) {
+                    datosPersona_Vgil = ConexionVgil.recuperadatosUsuarios_Vgil(usuario);
+                    ConexionVgil.cerrarconexion_Vgil();
+                    MenuPrincipalVgil p = new MenuPrincipalVgil();
+                    p.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Usuario o contrase?a erroneos. Intentelo de nuevo");
+                    campoUsuario.setText("");
+                    campoContraseña.setText("");
+                }
+                
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

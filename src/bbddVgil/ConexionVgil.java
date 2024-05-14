@@ -4,6 +4,7 @@
  */
 package bbddVgil;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,15 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConexionVgil {
- 
-        public static Connection conn;
 
-    public static Connection conectar() {
+    public static Connection conn;
+
+    public static Connection conectar_Vgil() {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try {
-                conn = (Connection) DriverManager.getConnection(    "jdbc:mysql://145.14.151.1/u812167471_consultorioDaw", "u812167471_consultorioDaw", "password=2024-Daw");
+                conn = (Connection) DriverManager.getConnection("jdbc:mysql://145.14.151.1/u812167471_consultorioDaw", "u812167471_consultorioDaw", "2024-Daw");
             } catch (SQLException ex) {
                 Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -31,7 +32,7 @@ public class ConexionVgil {
         return null;
     }
 
-    public static Connection cerrarconexion() {
+    public static Connection cerrarconexion_Vgil() {
         try {
             conn.close();
         } catch (SQLException ex) {
@@ -39,9 +40,8 @@ public class ConexionVgil {
         }
         return null;
     }
-    
-    
-public static boolean acceder(String user, String pass) {
+
+    public static boolean acceder_Vgil(String usuario, String pass) {
 
         String consulta = "SELECT usuario, contraseña FROM empleados WHERE usuario=? AND contraseña=?";
 
@@ -50,7 +50,7 @@ public static boolean acceder(String user, String pass) {
             PreparedStatement pst = conn.prepareStatement(consulta);
             ResultSet rs;
 
-            pst.setString(1, user);
+            pst.setString(1, usuario);
             pst.setString(2, pass);
 
             rs = pst.executeQuery();
@@ -62,5 +62,34 @@ public static boolean acceder(String user, String pass) {
             return false;
         }
     }
+
+    public static String[] recuperadatosUsuarios_Vgil(String user) {
+
+        String[] usuario = new String[3];
+
+        String consulta = "SELECT CONCAT (nombre, ' ', apellidos), numero_colegiado, tipo FROM personal WHERE usuario= '" + usuario + "'";
+
+        try {
+            Statement st = conn.createStatement();
+            try (ResultSet rs = st.executeQuery(consulta)) {
+                if (rs.next()) {
+                    usuario[0] = rs.getString(1);
+                    usuario[1] = rs.getString(2);
+                    usuario[2] = rs.getString(3);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return usuario;
+
+    }
     
+    public static Connection cargarCitas_Vgil () {
+        return null;
+    }
+    
+    public static 
 }
+
