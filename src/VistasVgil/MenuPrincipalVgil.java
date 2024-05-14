@@ -45,6 +45,7 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1275, 750));
+        setResizable(false);
 
         jLabel1.setText("jLabel1");
 
@@ -159,7 +160,7 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(botonEnfermeria, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(botonPersonalMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonPersonalMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
@@ -238,8 +239,8 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEnfermeriaActionPerformed
 
     private void botonPersonalMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPersonalMedicoActionPerformed
-       MedicoVgil medico = new MedicoVgil();
-       medico.setVisible(true);
+       PersonalMedicoVgil personal = new PersonalMedicoVgil(this, rootPaneCheckingEnabled);
+       personal.setVisible(true);
     }//GEN-LAST:event_botonPersonalMedicoActionPerformed
 
     /**

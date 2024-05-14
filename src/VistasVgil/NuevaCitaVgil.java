@@ -43,6 +43,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 465));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -165,6 +166,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
