@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package VistasVgil;
+
 import UtilidadesVgil.UtilidadesVgil;
+import javax.swing.JOptionPane;
+import modeloVgil.PersonalVgil;
+import bbddVgil.ConexionVgil;
+import UtilidadesVgil.EncriptadoVgil;
+
 /**
  *
  * @author oceans
@@ -260,16 +266,49 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> tipoPersonal;
     // End of variables declaration//GEN-END:variables
 
-String nom, ape , usua, cont, tipoP;
-int num_cole, tele;        
+    String nom, ape, usua, cont, tipoP;
+    int num_cole, tele;
 
+    void registrarPersonal_Vgil() {
 
-void registrarPersonal_Vgil () {
+        if (UtilidadesVgil.campoVacio_Vgil(numeroColegiado)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(numeroColegiado);
+        } else if (UtilidadesVgil.campoVacio_Vgil(nombre)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(nombre);
+        } else if (UtilidadesVgil.campoVacio_Vgil(apellidos)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(apellidos);
+        } else if (UtilidadesVgil.campoVacio_Vgil(telefono)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(telefono);
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoUsuario)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoUsuario);
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoContraseña)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoContraseña);
+        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(tipoPersonal)) {
+            UtilidadesVgil.alertaComboNoSeleccionado_Vgil(tipoPersonal);
+        } else {
 
-if (UtilidadesVgil.campoVacio_Vgil(numeroColegiado)) {
-UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(numeroColegiado);
-}
+            num_cole = numeroColegiado.getText();
+            nom = nombre.getText();
+            ape = apellidos.getText();
+            tele = Integer.parseInt(telefono.getText());
+            tipoP = (String) tipoPersonal.getSelectedItem();
+            usua = campoUsuario.getText();
+            cont = new String(campoContraseña.getPassword());
 
-}
+            PersonalVgil nuevaPersona = new PersonalVgil(num_cole, nom, ape, tele, usua, cont, tipoP);
+
+            ConexionVgil.conectar_Vgil();
+
+            if (ConsultasEmpleados.registrarEmpleado(em)) {
+
+                JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
+            }
+            ConexionVgil.cerrarconexion_Vgil();
+        }
+
+    }
 
 }
