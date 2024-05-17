@@ -152,5 +152,6 @@ public class PacienteVgil {
     private String datosSaludGeneralVgil;
     private Date fechaRegistroVgil;
     
+    
 }
 

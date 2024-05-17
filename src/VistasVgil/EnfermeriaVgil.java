@@ -4,6 +4,12 @@
  */
 package VistasVgil;
 
+import UtilidadesVgil.UtilidadesVgil;
+import bbddVgil.ConexionVgil;
+import javax.swing.JOptionPane;
+import modeloVgil.ConsultaEnfermeriaVgil;
+import modeloVgil.PacienteVgil;
+
 /**
  *
  * @author oceans
@@ -32,22 +38,22 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        DNI = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        camponombre = new javax.swing.JTextField();
+        CampoApellidos = new javax.swing.JTextField();
+        campoTelefono = new javax.swing.JTextField();
+        campoEmail = new javax.swing.JTextField();
+        nuevoInforme = new javax.swing.JButton();
+        NuevaCita = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        HitorialdeconsultasMedicas = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,7 +96,12 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DNI Paciente");
 
-        jTextField1.setName("DNI Paciente"); // NOI18N
+        DNI.setName("DNI Paciente"); // NOI18N
+        DNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DNIActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Buscar Paciente");
 
@@ -113,25 +124,25 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Email");
 
-        jTextField2.setName("Nombre"); // NOI18N
+        camponombre.setName("Nombre"); // NOI18N
 
-        jTextField3.setName("Apellidos"); // NOI18N
+        CampoApellidos.setName("Apellidos"); // NOI18N
 
-        jTextField4.setName("Teléfono"); // NOI18N
+        campoTelefono.setName("Teléfono"); // NOI18N
 
-        jTextField5.setName("Correo Electrónico"); // NOI18N
+        campoEmail.setName("Correo Electrónico"); // NOI18N
 
-        jButton3.setText("Nuevo Informe ");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        nuevoInforme.setText("Nuevo Informe ");
+        nuevoInforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                nuevoInformeActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Nueva Cita ");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        NuevaCita.setText("Nueva Cita ");
+        NuevaCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                NuevaCitaActionPerformed(evt);
             }
         });
 
@@ -143,24 +154,24 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(camponombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CampoApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(128, 128, 128)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nuevoInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(171, 171, 171)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NuevaCita, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -172,21 +183,21 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(camponombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(nuevoInforme)
+                    .addComponent(NuevaCita))
                 .addGap(18, 18, 18))
         );
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Historial de cosultas medicas");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        HitorialdeconsultasMedicas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -197,7 +208,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
                 "Fecha", "Máxima", "Minima", "Glucosa"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(HitorialdeconsultasMedicas);
 
         jButton2.setText("Actualizar Tabla ");
 
@@ -218,7 +229,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -235,7 +246,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(40, 40, 40)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,15 +291,19 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      NuevaConsultaEnfermeriaVgil nuevoinformeenfermeria = new NuevaConsultaEnfermeriaVgil(this, rootPaneCheckingEnabled);
-      nuevoinformeenfermeria.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void nuevoInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoInformeActionPerformed
+        NuevaConsultaEnfermeriaVgil nuevoinformeenfermeria = new NuevaConsultaEnfermeriaVgil(this, rootPaneCheckingEnabled);
+        nuevoinformeenfermeria.setVisible(true);
+    }//GEN-LAST:event_nuevoInformeActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void NuevaCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevaCitaActionPerformed
         NuevaCitaEnfermeriaVgil nuevacita = new NuevaCitaEnfermeriaVgil(this, rootPaneCheckingEnabled);
         nuevacita.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_NuevaCitaActionPerformed
+
+    private void DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DNIActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,10 +341,15 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CampoApellidos;
+    private javax.swing.JTextField DNI;
+    private javax.swing.JTable HitorialdeconsultasMedicas;
+    private javax.swing.JButton NuevaCita;
+    private javax.swing.JTextField campoEmail;
+    private javax.swing.JTextField campoTelefono;
+    private javax.swing.JTextField camponombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -343,11 +363,48 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton nuevoInforme;
     // End of variables declaration//GEN-END:variables
-}
+
+    String dni, nom, ape, ema;
+    int tel;
+
+    public void registrarConsultaEnfermeria_Vgil() {
+
+        if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
+            JOptionPane.showMessageDialog(this, "El DNI es un cammpo es obligatorio por favor");
+        } else if (UtilidadesVgil.campoVacio_Vgil(camponombre)) {
+            JOptionPane.showMessageDialog(this, "El Nombre es un campo obligatorio por favor ");
+        } else if (UtilidadesVgil.campoVacio_Vgil(CampoApellidos)) {
+            JOptionPane.showMessageDialog(this, "El apellido es un campo obligatorio por favor");
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoTelefono)) {
+            JOptionPane.showMessageDialog(this, "El telefono es un campo obligatorio por favor");
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoEmail)) {
+            JOptionPane.showMessageDialog(this, "El correo electronico es un campo obligatorio por favor ");
+        } else {
+            dni = DNI.getText();
+            nom = camponombre.getText();
+            ape = CampoApellidos.getText();
+            tel = Integer.parseInt(campoTelefono.getText());
+            ema = campoEmail.getText();
+
+                
+            PacienteVgil paciente = new PacienteVgil(dni, nom, ape,tel,ema);
+            
+             ConexionVgil.conectar_Vgil();
+
+            if (ConexionVgil.registrarPaciente_Vgil(paciente)) {
+
+                JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
+            }
+            ConexionVgil.cerrarconexion_Vgil();
+        }
+            
+        }
+
+    }
+
+

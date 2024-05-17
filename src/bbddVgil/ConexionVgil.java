@@ -41,6 +41,28 @@ public class ConexionVgil {
         return null;
     }
 
+    public static boolean datosPersona_Vgil() {
+
+        try {
+            String consulta = "SELECT numero_colegiado, nombre , apellidos , usuario , tipo FROM personal ";
+
+            PreparedStatement pst = conn.prepareStatement(consulta);
+            ResultSet rs;
+
+            pst.setString(0, "numero_colegiado");
+            pst.setString(1, "nombre");
+            pst.setString(2, "usuario");
+            pst.setString(4, "tipo");
+
+            rs = pst.executeQuery();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return false;
+    }
+
     public static boolean acceder_Vgil(String usuario, String pass) {
 
         String consulta = "SELECT usuario, contraseña FROM empleados WHERE usuario=? AND contraseña=?";
@@ -67,7 +89,7 @@ public class ConexionVgil {
 
         String[] usuario = new String[3];
 
-        String consulta = "SELECT CONCAT (nombre, ' ', apellidos), numero_colegiado, tipo FROM personal WHERE usuario= '" + usuario + "'";
+        String consulta = "SELECT CONCAT (nombre, ' ', apellidos), numero_colegiado, tipo FROM personal WHERE usuario= '" + user + "'";
 
         try {
             Statement st = conn.createStatement();
@@ -85,11 +107,20 @@ public class ConexionVgil {
         return usuario;
 
     }
-    
-    public static Connection cargarCitas_Vgil () {
+
+    public static Connection cargarCitas_Vgil() {
         return null;
     }
-    
-    public static 
-}
 
+    public static Connection cargarcitasEnfermerias_Vgil() {
+        return null;
+
+    }
+
+    public static Connection registrarPaciente_Vgil() {
+
+        return null;
+
+    }
+
+}
