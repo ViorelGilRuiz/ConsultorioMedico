@@ -295,11 +295,11 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
             usua = campoUsuario.getText();
             cont = new String(campoContraseña.getPassword());
 
-            PersonalVgil nuevaPersona = new PersonalVgil(num_cole, nom, ape, tele, usua, cont, tipoP);
+            PersonalVgil personna = new PersonalVgil(num_cole, nom, ape, tele, usua, cont, tipoP);
 
             ConexionVgil.conectar_Vgil();
 
-            if (ConsultasEmpleados.registrarEmpleado(em)) {
+            if (ConexionVgil.registrar(em)) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 

@@ -62,7 +62,7 @@ public class ConexionVgil {
         return null;
     }
 
-    public static boolean datosPersona_Vgil() {
+    public static boolean datosPersonal_Vgil() {
 
         try {
             String consulta = "SELECT numero_colegiado, nombre , apellidos , usuario , tipo FROM personal ";
@@ -140,31 +140,84 @@ public class ConexionVgil {
 
     }
 
-    public static void recuperaCitasMedicas_Vgil(DefaultTableModel modelo) {
+    public static void recuperaCitasMedicas_Vgil(DefaultTableModel modelo) throws SQLException {
 
         /**
          * Método que nso permitira obtener de la base de datos las citas
          * medicas correspondientes a la fecha actual para cargarlas en una
-         * tabla
-         *
+         * tabla *
          */
+        try {
+
+            String consulta = "SELECT dniPaciente, nombre, dia, hora FROM citasenfermeria";
+
+            ResultSet rs = conn.createStatement().executeQuery(consulta);
+            while (rs.next()) {
+                String dniPaciente = rs.getString("dniPaciente");
+                String nombre = rs.getString("nombre");
+                String fecha = rs.getString("dia");
+                String hora = rs.getString("hora");
+
+                Object[] citaMedica = {dniPaciente, nombre, fecha, hora};
+                modelo.addRow(citaMedica);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static void recuperarCitasEnfermeria_Vgil(DefaultTableModel modelo) {
-        /**
-         * Método que nso permitira obtener de la base de datos las citas de
-         * enfermeria correspondientes a la fecha actual para cargarlas en una
-         * tabla
-         */
+        try {
+            /**
+             * Método que nso permitira obtener de la base de datos las citas de
+             * enfermeria correspondientes a la fecha actual para cargarlas en
+             * una tabla
+             */
+            String consulta = "SELECT dniPaciente, nombre, dia, hora FROM citasenfermeria";
+
+            ResultSet rs = conn.createStatement().executeQuery(consulta);
+            while (rs.next()) {
+                String dniPaciente = rs.getString("dniPaciente");
+                String nombre = rs.getString("nombre");
+                String fecha = rs.getString("dia");
+                String hora = rs.getString("hora");
+
+                Object[] citaMedica = {dniPaciente, nombre, fecha, hora};
+                modelo.addRow(citaMedica);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static boolean registrarCitaMedica_Vgil(Cita citaMedica) {
+}
 
-        /**
-         * Consulta para el registro de citas con el nombre y el dni del
-         * paciente encriptados
-         */
-    }
+public static boolean registrarCitaMedica_Vgil(Cita citaMedica) {    
+
+String consultaInsert = "INSERT INTO citas (dniPaciente, nombre , dia, hora) "
+                + "VALUES (?,?,?,?)";
+
+        try
+            PreparedStatement st = conn.prepareStatement(consultaInsert);
+            
+            st.setString(1, citaMedica.getdniPaciente());
+            st.setString(2, citaMedica.getNombre());
+            st.setString(3, citaMedica.getdia());
+            st.setString(4, citaMedica.gethora());
+            
+          
+            st.execute();
+
+            return true;
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return false;
+
+}
+
 
     public static boolean registrarCitaEnfermeria_Vgil(Cita citaenfermeria) {
         /**
@@ -173,30 +226,14 @@ public class ConexionVgil {
          */
     }
 
-    public static boolean comprobarDni_Vgil(String campo) {
+    public static boolean comprobarDni_Vgil(String campo){
 
         /**
-         * Consulta para comprobar si un DNI existe en la tabla de pacientes
+         * Consulta para comprobar si un DNI existe en la tabla de p
+         * acientes
          * asociado a algun paciente
          */
-        try {
-            String consulta = "SELECT dniCliente from clientes where dniCliente =?";
-
-            PreparedStatement pst = conn.prepareStatement(consulta);
-            ResultSet rs;
-
-            pst.setString(1, campo);
-
-            rs = pst.executeQuery();
-
-            return rs.next();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
+}
     public static PacienteVgil recuperarDatosPaciente_Vgil(String dni) {
         /**
          * Descarga de informacion especificia de pacientes cuyo dni se
@@ -256,6 +293,8 @@ public class ConexionVgil {
          * Método para rescatar el listado de pacientes a la base de datos y
          * organizarlos para su visualizacion en una tabka
          */
+  
+
     }
 
     public static boolean compruebaUsuario_Vgil(String usuario) {
@@ -263,15 +302,20 @@ public class ConexionVgil {
          * Consulta para comprobar que el nombre de usuario en el proceso de
          * registro de personal esta disponible
          */
-    }
 
-    public static boolean compruebaNumeroColegiado_Vgil(long numero) {
+
+}
+
+public static boolean compruebaNumeroColegiado_Vgil(long numero) {
 
         /**
          * Consulta para comprobar que el numero de colegiado del empleado en el
          * proceso de registro esta disponible o existe ya algun personal medico
          * registrado con ese numero de colegiado
          */
+
+
+    
     }
 
     public static boolean registrarPersonal_Vgil(PersonalVgil persona) {
@@ -280,6 +324,9 @@ public class ConexionVgil {
          * Consulta para la incorporacion de nuevos empleados medicos a la
          * aplicacion (Médicos o enfermeria)
          */
+
+
+
     }
 
 }
