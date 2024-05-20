@@ -7,7 +7,7 @@ package VistasVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import javax.swing.JOptionPane;
 import modeloVgil.PersonalVgil;
-import bbddVgil.ConexionVgil;
+import 
 import UtilidadesVgil.EncriptadoVgil;
 
 /**
@@ -54,7 +54,6 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(730, 570));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -87,6 +86,8 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
                         .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel2.setForeground(new java.awt.Color(0, 204, 204));
 
         jLabel3.setText("Nº de Colegiado");
         jLabel3.setToolTipText("");
@@ -287,7 +288,7 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
             UtilidadesVgil.alertaComboNoSeleccionado_Vgil(tipoPersonal);
         } else {
 
-            num_cole = numeroColegiado.getText();
+            num_cole = Integer.parseInt(num_cole).getText();
             nom = nombre.getText();
             ape = apellidos.getText();
             tele = Integer.parseInt(telefono.getText());
@@ -295,11 +296,11 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
             usua = campoUsuario.getText();
             cont = new String(campoContraseña.getPassword());
 
-            PersonalVgil personna = new PersonalVgil(num_cole, nom, ape, tele, usua, cont, tipoP);
+            PersonalVgil persona = new PersonalVgil(num_cole, nom, ape, tele, usua, cont, tipoP);
 
             ConexionVgil.conectar_Vgil();
 
-            if (ConexionVgil.registrar(em)) {
+            if (ConexionVgil.registrar(persona)) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 

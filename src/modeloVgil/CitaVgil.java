@@ -53,7 +53,9 @@ public class CitaVgil {
 
     @Override
     public String toString() {
-        return "CitaVgil{" + "dniPacienteVgil=" + dniPacienteVgil + ", nombreVgil=" + nombreVgil + ", diaVgil=" + diaVgil + ", horaVgil=" + horaVgil + '}';
+        return "CitaVgil{" + "dniPacienteVgil=" + dniPacienteVgil 
+                + ", nombreVgil=" + nombreVgil + ", diaVgil="
+                + diaVgil + ", horaVgil=" + horaVgil + '}';
     }
     
     String dniPacienteVgil;

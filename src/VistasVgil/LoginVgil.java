@@ -4,10 +4,12 @@
  */
 package VistasVgil;
 
+import 
+
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import UtilidadesVgil.EncriptadoVgil;
-import bbddVgil.ConexionVgil;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -157,8 +159,11 @@ public class LoginVgil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MenuPrincipalVgil menuPrincipal = new MenuPrincipalVgil();
-        menuPrincipal.setVisible(true);
+        try {
+            acceso_Vgil();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -217,7 +222,7 @@ public class LoginVgil extends javax.swing.JFrame {
         try {
             usuario = campoUsuario.getText();
             contrasenya = new String(campoContraseña.getPassword());
-            String passencript = null;
+            String passencript;
             
             passencript = EncriptadoVgil.encriptar_Vgil(contrasenya);
             
@@ -230,7 +235,7 @@ public class LoginVgil extends javax.swing.JFrame {
                     MenuPrincipalVgil p = new MenuPrincipalVgil();
                     p.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Usuario o contrase?a erroneos. Intentelo de nuevo");
+                    JOptionPane.showMessageDialog(this, "Usuario o contraseña erroneos. Intentelo de nuevo");
                     campoUsuario.setText("");
                     campoContraseña.setText("");
                 }

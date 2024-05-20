@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package UtilidadesVgil;
-import bbddVgil.ConexionVgil;
-import static bbddVgil.ConexionVgil.conn;
+
+
+import bbddVgil.ConexionVgil.conn;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -35,6 +38,8 @@ public class UtilidadesVgil {
     public static boolean campoVacio_Vgil(JTextField campo) {
         return campo.getText().isBlank();
     }
+    
+
 
     public static boolean lanzaAlertaCampoVacio_Vgil(JTextField campo) {
         JOptionPane.showMessageDialog(null, "El campo " + campo.getName() + " es obligatorio");

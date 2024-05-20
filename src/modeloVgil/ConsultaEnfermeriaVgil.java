@@ -80,7 +80,11 @@ public class ConsultaEnfermeriaVgil {
 
     @Override
     public String toString() {
-        return "ConsultaEnfermeriaVgil{" + "dniPacienteVgil=" + dniPacienteVgil + ", fechaConsultaVgil=" + fechaConsultaVgil + ", maximaVgil=" + maximaVgil + ", minimaVgil=" + minimaVgil + ", glucosaVgil=" + glucosaVgil + ", pesoVgil=" + pesoVgil + ", codigoFacultativoVgil=" + codigoFacultativoVgil + '}';
+        return "ConsultaEnfermeriaVgil{" + "dniPacienteVgil="
+                + dniPacienteVgil + ", fechaConsultaVgil=" + fechaConsultaVgil 
+                + ", maximaVgil=" + maximaVgil + ", minimaVgil=" + minimaVgil 
+                + ", glucosaVgil=" + glucosaVgil + ", pesoVgil=" + pesoVgil 
+                + ", codigoFacultativoVgil=" + codigoFacultativoVgil + '}';
     }
 
    
