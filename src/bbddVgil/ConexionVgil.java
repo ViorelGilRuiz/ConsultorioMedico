@@ -1,7 +1,10 @@
+package bbddVgil;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import java.lang.ExceptionInInitializerError;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import modeloVgil.CitaVgil;
 import modeloVgil.ConsultaVgil;
 import modeloVgil.ConsultaEnfermeriaVgil;
+
 public class ConexionVgil {
 
     public static Connection conn;
@@ -66,8 +70,9 @@ public class ConexionVgil {
             PreparedStatement st = conn.prepareStatement(consultaInsert);
             st.setString(1, citaenfermeria.getDniPacienteVgil());
             st.setString(2, citaenfermeria.getNombreVgil());
-            st.setString(3,  citaenfermeria.getDiaVgil().toString());
-            st.setString(4,Double.parseDouble(citaenfermeria.getHoraVgil()));
+            st.setString(3, citaenfermeria.getDiaVgil().toString());
+            st.setDouble(4, citaenfermeria.getHoraVgil());
+
             st.execute();
             return true;
         } catch (SQLException ex) {
@@ -172,12 +177,13 @@ public class ConexionVgil {
             Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static boolean registrarCitaMedica(ConsultaVgil consulta) {
 
+    public static boolean registrarCitaMedica(ConsultaEnfermeriaVgil consulta) {
 
-String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta, maxima, minima, glucosa, peso, codigoFacultativo)" 
-+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta,codigoFacultativo)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        String salud = "INSERT INTO enfermeria (tensionMax, tensionMin, glucosa, peso ) " + "VALUES (?,?,?,?)";
 
         try {
             PreparedStatement st = conn.prepareStatement(consultaInsert);
@@ -197,15 +203,13 @@ String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta, maxi
 
         return false;
     }
+
     public static boolean comprobarDni(String campo) {
-        
-         /**
-         * Consulta para comprobar si un DNI existe en la tabla de p
-         * acientes
+
+        /**
+         * Consulta para comprobar si un DNI existe en la tabla de p acientes
          * asociado a algun paciente
          */
-
-
         try {
             String consulta = "SELECT dniPaciente from pacientes where dniPaciente =?";
 
@@ -223,21 +227,52 @@ String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta, maxi
         }
         return false;
     }
-    
-    public static boolean registrarCitaEnfermeria_Vgil(Cita citaenfermeria) {
+
+    public static boolean registrarCitaEnfermeria_Vgil(ConsultaEnfermeriaVgil cita) {
         /**
          * Consulta para el registro de citasEnfermeria con el nombre y el dni
          * del paciente encriptados
          */
+        String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta, maxima, minima, glucosa, peso, codigoFacultativo)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        
+        try {
+            PreparedStatement st = conn.prepareStatement(consultaInsert);
+            st.setString(1, cita.getDniPacienteVgil());
+            st.setDate(2, (java.sql.Date) new Date(cita.getFechaConsultaVgil().getTime())); // Convertir java.util.Date a java.sql.Date
+            st.setDouble(3, cita.getMaximaVgil());
+            st.setDouble(4, cita.getMinimaVgil());
+            st.setInt(5, cita.getGlucosaVgil());
+            st.setDouble(6, cita.getPesoVgil());
+            st.setInt(7, cita.getCodigoFacultativoVgil());
 
+            st.execute();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Error al insertar la cita: " + ex.getMessage());
+        }
 
-
+        return false;
 
     }
 
+    public static void cargasCombocp_Vgil() {
+                
+    /**
+     * Carglos los codigos postales asocados a los consultorios medicos 
+     */
+    }
+    
+    public static boolean registrarPaciente_Vgil() {
+    
+        
+        
+    }
+    
+    public static void cargarTablaPacientes_Vgil() {
+    
+    }
     
     
-      
+    
 }

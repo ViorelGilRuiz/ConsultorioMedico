@@ -4,10 +4,11 @@
  */
 package VistasVgil;
 
+import bbddVgil.ConexionVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import javax.swing.JOptionPane;
 import modeloVgil.PersonalVgil;
-import 
+
 import UtilidadesVgil.EncriptadoVgil;
 
 /**
@@ -285,10 +286,10 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
         } else if (UtilidadesVgil.campoVacio_Vgil(campoContraseña)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoContraseña);
         } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(tipoPersonal)) {
-            UtilidadesVgil.alertaComboNoSeleccionado_Vgil(tipoPersonal);
+            JOptionPane.showMessageDialog(this, "El tipo de personal es obligatorio por favor");
         } else {
 
-            num_cole = Integer.parseInt(num_cole).getText();
+            num_cole = Integer.parseInt(numeroColegiado.getText());
             nom = nombre.getText();
             ape = apellidos.getText();
             tele = Integer.parseInt(telefono.getText());
@@ -307,7 +308,7 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
             }
-            ConexionVgil.cerrarconexion_Vgil();
+            ConexionVgil.cerrarConexion_Vgil();
         }
 
     }

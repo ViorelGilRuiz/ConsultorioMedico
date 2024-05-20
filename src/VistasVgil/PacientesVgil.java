@@ -33,7 +33,7 @@ public class PacientesVgil extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        listadoPacientes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         campoDNI = new javax.swing.JTextField();
@@ -86,7 +86,7 @@ public class PacientesVgil extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Listado Pacientes");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        listadoPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -97,7 +97,7 @@ public class PacientesVgil extends javax.swing.JDialog {
                 "DNI", "Nombre", "Apellidos", "Telefono", "CP"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(listadoPacientes);
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Paciente"));
@@ -290,7 +290,7 @@ public class PacientesVgil extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable listadoPacientes;
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 

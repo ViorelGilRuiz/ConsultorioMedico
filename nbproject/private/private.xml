@@ -3,23 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/MedicoVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/ConsultaEnfermeriaVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/PersonalMedicoVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/NuevoPacienteVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/UtilidadesVgil/UtilidadesVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/ConsultaVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/PacienteVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/LoginVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/UtilidadesVgil/EncriptadoVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/PersonalVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/NuevaCitaEnfermeriaVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/PacientesVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/bbddVgil/ConexionVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/CitaVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/NuevaCitaVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/EnfermeriaVgil.java</file>
-            <file>file:/C:/Users/Viorel/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/MenuPrincipalVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/LoginVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/bbddVgil/ConexionVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/ConsultaEnfermeriaVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/consultoriomedico/ConsultorioMedicoVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/NuevaConsultaEnfermeriaVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/NuevaCitaVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/EnfermeriaVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/CitaVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/ConsultaVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/UtilidadesVgil/EncriptadoVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/UtilidadesVgil/UtilidadesVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/PersonalVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/PersonalMedicoVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/modeloVgil/PacienteVgil.java</file>
+            <file>file:/C:/Users/oceans/Documents/NetBeansProjects/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/ConsultorioMedico/src/VistasVgil/PacientesVgil.java</file>
         </group>
     </open-files>
 </project-private>

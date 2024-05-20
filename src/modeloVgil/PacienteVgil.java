@@ -143,6 +143,16 @@ public class PacienteVgil {
     private String apellidosVgil;
     private Date fechaNacimientoVgil;
     private int telefonoVgil;
+
+    public PacienteVgil(String dniVgil, String nombreVgil, String apellidosVgil, int telefonoVgil, String emailVgil) {
+        this.dniVgil = dniVgil;
+        this.nombreVgil = nombreVgil;
+        this.apellidosVgil = apellidosVgil;
+        this.telefonoVgil = telefonoVgil;
+        this.emailVgil = emailVgil;
+    }
+    
+    
     private String emailVgil;
     private int cpVgil;
     private String sexoVgil;
@@ -151,6 +161,7 @@ public class PacienteVgil {
     private String antecedentesSaludVgil;
     private String datosSaludGeneralVgil;
     private Date fechaRegistroVgil;
+    
     
     
 }

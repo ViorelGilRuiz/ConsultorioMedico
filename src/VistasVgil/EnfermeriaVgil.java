@@ -4,6 +4,7 @@
  */
 package VistasVgil;
 
+import bbddVgil.ConexionVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import bbddVgil.ConexionVgil;
 import javax.swing.JOptionPane;
@@ -400,7 +401,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
             }
-            ConexionVgil.cerrarconexion_Vgil();
+            ConexionVgil.cerrarConexion_Vgil();
         }
             
         }

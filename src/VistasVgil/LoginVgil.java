@@ -4,7 +4,8 @@
  */
 package VistasVgil;
 
-import 
+import bbddVgil.ConexionVgil;
+
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -159,11 +160,7 @@ public class LoginVgil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            acceso_Vgil();
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginVgil.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        acceso_Vgil();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -218,7 +215,7 @@ public class LoginVgil extends javax.swing.JFrame {
     String contrasenya;
     public static String[] datosPersona_Vgil;
 
-    public void acceso_Vgil() throws SQLException {
+    public void acceso_Vgil()  {
         try {
             usuario = campoUsuario.getText();
             contrasenya = new String(campoContraseña.getPassword());
@@ -230,8 +227,8 @@ public class LoginVgil extends javax.swing.JFrame {
             ConexionVgil.conectar_Vgil();
             {
                 if (ConexionVgil.acceder_Vgil(usuario, passencript)) {
-                    datosPersona_Vgil = ConexionVgil.recuperadatosUsuarios_Vgil(usuario);
-                    ConexionVgil.cerrarconexion_Vgil();
+                    datosPersona_Vgil = ConexionVgil.recuperaDatosUsuariosLoqueados_Vgil(usuario);
+                    ConexionVgil.cerrarConexion_Vgil();
                     MenuPrincipalVgil p = new MenuPrincipalVgil();
                     p.setVisible(true);
                 } else {

@@ -5,7 +5,9 @@
 package UtilidadesVgil;
 
 
-import bbddVgil.ConexionVgil.conn;
+import bbddVgil.ConexionVgil;
+import static bbddVgil.ConexionVgil.conn;
+
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.sql.PreparedStatement;

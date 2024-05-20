@@ -5,8 +5,13 @@
 package VistasVgil;
 
 import UtilidadesVgil.UtilidadesVgil;
+import bbddVgil.ConexionVgil;
+import modeloVgil.CitaVgil;
+import modeloVgil.ConsultaVgil;
+import modeloVgil.PacienteVgil;
 
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -232,30 +237,35 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     String dni, nom, ape;
-    Date fecha, hora;
+    Date fecha;
+    Double hora;
 
-    public void nuevaCita_Vgil () {
-    
-        if (UtilidadesVgil.campoVacio_Vgil(campoDNI)){
-        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
-        }else if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
-        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoNombre);        
-        }else if (UtilidadesVgil.campoVacio_Vgil(campoFecha)) {
-        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoFecha);
-        }else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)){
-        UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora);
-        }else{
-            
-       dni = campoDNI.getText();
-       nom = campoNombre.getText();
-       fecha = campoFecha.getDate();
-       hora = campoHora.getSelectedItem();
+    public void nuevaCita_Vgil() {
+
+        if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoNombre);
+        } else if (campoFecha.getDate()==null){
+            JOptionPane.showMessageDialog(this, "Debes selecionar una fecha porfavor");        
+        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)) {
+            UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora);
+        } else {
+
+            dni = campoDNI.getText();
+            nom = campoNombre.getText();
+            fecha = campoFecha.getDate();
+            hora = Double.parseDouble(campoHora.getSelectedItem().toString());
+
+             // Crear una nueva cita
+        CitaVgil nuevaCita = new CitaVgil(dni, nom, fecha, hora);
+
        
-       
-       
-       
-            
+        if (ConexionVgil.registrarCitaEnfermeria_Vgil(nuevaCita)) {
+            ConexionVgil.conectar_Vgil();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al crear una nueva cita");
         }
     }
-
+    }
 }
