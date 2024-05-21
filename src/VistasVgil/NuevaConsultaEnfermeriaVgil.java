@@ -343,7 +343,7 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
             
             ConexionVgil.conectar_Vgil();
             
-         if (ConexionVgil.registrarCitaMedica_Vgil(cons) {
+         if (nuevaConsultaEnfermeria_Vgil()) {
             ConexionVgil.conectar_Vgil();
         } else {
             JOptionPane.showMessageDialog(null, "Error al crear un nuevo informe ");

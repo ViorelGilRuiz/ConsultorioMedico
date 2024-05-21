@@ -389,12 +389,11 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
             tel = Integer.parseInt(campoTelefono.getText());
             ema = campoEmail.getText();
 
-                
-            PacienteVgil paciente = new PacienteVgil(dni, nom, ape,tel,ema);
-            
-             ConexionVgil.conectar_Vgil();
+            PacienteVgil paciente = new PacienteVgil(dni, nom, ape, tel, ema);
 
-            if (ConexionVgil.registrarPaciente_Vgil(paciente)) {
+            ConexionVgil.conectar_Vgil();
+
+            if (registrarConsultaEnfermeria_Vgil()) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 
@@ -403,9 +402,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
             }
             ConexionVgil.cerrarConexion_Vgil();
         }
-            
-        }
 
     }
 
-
+}

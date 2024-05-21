@@ -4,6 +4,7 @@ package bbddVgil;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import com.mysql.jdbc.Statement;
 import java.lang.ExceptionInInitializerError;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import modeloVgil.CitaVgil;
 import modeloVgil.ConsultaVgil;
 import modeloVgil.ConsultaEnfermeriaVgil;
+import modeloVgil.PersonalVgil;
 
 public class ConexionVgil {
 
@@ -182,7 +184,7 @@ public class ConexionVgil {
 
         String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta,codigoFacultativo)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+
         String salud = "INSERT INTO enfermeria (tensionMax, tensionMin, glucosa, peso ) " + "VALUES (?,?,?,?)";
 
         try {
@@ -257,22 +259,97 @@ public class ConexionVgil {
     }
 
     public static void cargasCombocp_Vgil() {
-                
-    /**
-     * Carglos los codigos postales asocados a los consultorios medicos 
-     */
+
+        /**
+         * Carglos los codigos postales asociados a los consultorios medicos
+         */
+        String consultaCp = "SELECT * FROM codigospostales";
+
+        ConexionVgil.conectar_Vgil();
+
     }
-    
+
     public static boolean registrarPaciente_Vgil() {
-    
-        
-        
+
+        String consultaInsert = "INSERT INTO paciente (dni, nombre, apellidos, fechaNacimiento , telefono, email, cp , sexo , tabaquismo, consumoAlcohol , antecedentesSalud, datosSaludGeneral, fechaRegistro)"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
     }
-    
-    public static void cargarTablaPacientes_Vgil() {
-    
+
+    public static void cargarTablaPacientes_Vgil(DefaultTableModel modelo) throws SQLException {
+
+        Object[] datos = new Object[5];
+
+        String consulta = "SELECT  (dni, nombre, apellidos, telefono, cp FROM paciente)"
+                + "VALUES (?,?,?,?,?)";
+
+        ResultSet rs = conn.createStatement().executeQuery(consulta);
+
+        while (rs.next()) {
+            datos[0] = rs.getString("dni");
+            datos[1] = rs.getString("nombre");
+            datos[0] = rs.getString("apellidos");
+            datos[0] = rs.getString("telefono");
+            datos[0] = rs.getString("cp");
+
+            modelo.addRow(datos);
+
+        }
     }
-    
-    
-    
+
+    public static boolean compruebaUser(String usuario) {
+
+        String consultaComprueba = "SELECT usuario FROM personal WHERE usuario = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(consultaComprueba)) {
+            ps.setString(1, usuario);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean compruebaNumeroColegiado(long numero) {
+
+        String consultaComprueba = "SELECT numero_colegiado FROM personal WHERE numero_colegiado = ?";
+        try (PreparedStatement ps = conn.prepareStatement(consultaComprueba)) {
+            ps.setLong(1, numero);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultaVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public static boolean registrarPersonal(PersonalVgil p) throws SQLException {
+
+        String consultaInsert = "INSERT INTO personal (numero_colegiado, nombre, apellidos, telefono, usuario, contrasenya, tipo)"
+                + "VALUES (?,?,?,?,?,?,?)";
+
+        
+            PreparedStatement st = conn.prepareStatement(consultaInsert)
+            
+         st.setString(1, String.valueOf(p.getNumero_colegiadoVgil()));
+                st.setString(2, p.getNombreVgil());
+                st.setString(3, p.getApellidosVgil());
+                st.setString(4, String.valueOf(p.getTelefonoVgil()));
+                st.setString(5, p.getUsuarioVgil());
+                st.setString(6, p.getContrasenyaVgil());
+                st.setString(7, p.getTipoVgil());
+
+                return true;
+            }catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+            return false;
+        }
+
+    }
+
 }
