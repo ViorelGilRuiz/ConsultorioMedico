@@ -89,6 +89,14 @@ public class ConsultaEnfermeriaVgil {
 
    
     String dniPacienteVgil;
+
+    public ConsultaEnfermeriaVgil(String dniPacienteVgil, double maximaVgil, double minimaVgil, int glucosaVgil, double pesoVgil) {
+        this.dniPacienteVgil = dniPacienteVgil;
+        this.maximaVgil = maximaVgil;
+        this.minimaVgil = minimaVgil;
+        this.glucosaVgil = glucosaVgil;
+        this.pesoVgil = pesoVgil;
+    }
     Date fechaConsultaVgil;
     double maximaVgil, minimaVgil;
     int glucosaVgil;

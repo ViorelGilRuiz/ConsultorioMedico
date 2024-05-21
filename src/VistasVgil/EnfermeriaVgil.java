@@ -393,7 +393,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
 
             ConexionVgil.conectar_Vgil();
 
-            if (registrarConsultaEnfermeria_Vgil()) {
+            if (ConexionVgil.registrarCitaEnfermeria_Vgil()) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 

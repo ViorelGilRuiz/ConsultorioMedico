@@ -6,6 +6,8 @@ package VistasVgil;
 import bbddVgil.ConexionVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import javax.swing.JOptionPane;
+import modeloVgil.CitaVgil;
+import modeloVgil.ConsultaEnfermeriaVgil;
 import modeloVgil.ConsultaEnfermeriaVgil;
 
 /**
@@ -191,6 +193,11 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
         );
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -253,6 +260,10 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       nuevaConsultaEnfermeria_Vgil();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,7 +354,9 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
             
             ConexionVgil.conectar_Vgil();
             
-         if (nuevaConsultaEnfermeria_Vgil()) {
+            ConsultaEnfermeriaVgil informe = new ConsultaEnfermeriaVgil(dni, 0, 0, HEIGHT, 0);
+            
+         if (ConexionVgil.registrarCitaEnfermeria_Vgil(informe)) {
             ConexionVgil.conectar_Vgil();
         } else {
             JOptionPane.showMessageDialog(null, "Error al crear un nuevo informe ");

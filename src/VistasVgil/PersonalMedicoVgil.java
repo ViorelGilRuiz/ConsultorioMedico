@@ -109,6 +109,11 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
         tipoPersonal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Médico", "Enfermería" }));
 
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -203,6 +208,10 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       registrarPersonal_Vgil();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,7 +310,7 @@ public class PersonalMedicoVgil extends javax.swing.JDialog {
 
             ConexionVgil.conectar_Vgil();
 
-            if (ConexionVgil.registrar(persona)) {
+            if (ConexionVgil.registrarPersonal_Vgil(persona)) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 
