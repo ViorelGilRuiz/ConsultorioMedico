@@ -6,6 +6,8 @@ package VistasVgil;
 
 import UtilidadesVgil.UtilidadesVgil;
 import bbddVgil.ConexionVgil;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import modeloVgil.CitaVgil;
 import modeloVgil.ConsultaVgil;
 import modeloVgil.PacienteVgil;
@@ -47,9 +49,9 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         campoDNI = new javax.swing.JTextField();
         campoNombre = new javax.swing.JTextField();
-        campoFecha = new com.toedter.calendar.JDateChooser();
         campoHora = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        campoFecha = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,7 +99,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Hora");
 
-        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "8.3", "12.3", " " }));
 
         jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +107,8 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        campoFecha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Una Semana", "Dos Semanas", "Un Mes" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -123,15 +127,15 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
                     .addComponent(campoDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(campoFecha, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(campoHora, javax.swing.GroupLayout.Alignment.LEADING, 0, 133, Short.MAX_VALUE)
-                        .addComponent(campoFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(campoHora, javax.swing.GroupLayout.Alignment.LEADING, 0, 133, Short.MAX_VALUE)))
                 .addContainerGap(188, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(campoDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,10 +144,10 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(campoHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,6 +187,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         nuevaCita_Vgil();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -230,7 +235,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campoDNI;
-    private com.toedter.calendar.JDateChooser campoFecha;
+    private javax.swing.JComboBox<String> campoFecha;
     private javax.swing.JComboBox<String> campoHora;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JButton jButton1;
@@ -246,35 +251,42 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     String dni, nom, ape;
-    Date fecha;
-    Double hora;
+Date fecha;
+Double hora;
 
-    public void nuevaCita_Vgil() {
+public void nuevaCita_Vgil() {
 
-        if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
-            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
-        } else if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
-            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoNombre);
-        } else if (campoFecha.getDate()==null){
-            JOptionPane.showMessageDialog(this, "Debes selecionar una fecha porfavor");        
-        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)) {
-            UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora);
-        } else {
-
+    if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
+        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
+    } else if (UtilidadesVgil.campoVacio_Vgil(campoNombre)) {
+        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoNombre);
+    } else if (campoFecha.getDate()==null) {
+        JOptionPane.showMessageDialog(this, "Debes seleccionar una fecha por favor");
+    } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)) {
+        JOptionPane.showMessageDialog(this, "Debes seleccionar una hora por favor");
+    } else {
+        try {
             dni = campoDNI.getText();
             nom = campoNombre.getText();
             fecha = campoFecha.getDate();
             hora = Double.parseDouble(campoHora.getSelectedItem().toString());
 
-             // Crear una nueva cita
-        CitaVgil nuevaCita = new CitaVgil(dni, nom, fecha, hora);
-
-       
-        if (ConexionVgil.registrarCitaEnfermeria_Vgil(nuevaCita)) {
+            // Crear una nueva cita
+            CitaVgil nuevaCita = new CitaVgil(dni, nom, fecha, hora);
             ConexionVgil.conectar_Vgil();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al crear una nueva cita");
+
+            if (ConexionVgil.registrarCitaMedica_Vgil(nuevaCita)) {
+                JOptionPane.showMessageDialog(null, "Cita registrada exitosamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al crear una nueva cita");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "La hora debe ser un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(nuevaCita_Vgil().class.getName()).log(Level.SEVERE, null,ex);
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al registrar la cita", "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            ConexionVgil.cerrarConexion_Vgil();
         }
-    }
     }
 }

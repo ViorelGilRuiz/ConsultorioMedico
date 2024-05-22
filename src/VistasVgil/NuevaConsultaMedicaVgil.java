@@ -4,6 +4,7 @@
  */
 package VistasVgil;
 
+import UtilidadesVgil.UtilidadesVgil;
 /**
  *
  * @author oceans
@@ -37,11 +38,11 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         campoDNI = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        campoTratamiento = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        campoDiagnostico = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        campoObservaciones = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -83,25 +84,25 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
         jLabel3.setText("DNI CLiente");
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("DNI CLiente");
+        jLabel4.setText("Diagnóstico");
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("DNI CLiente");
+        jLabel5.setText("Tratamiento");
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("DNI CLiente");
+        jLabel6.setText("Observaciones");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        campoTratamiento.setColumns(20);
+        campoTratamiento.setRows(5);
+        jScrollPane1.setViewportView(campoTratamiento);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        campoDiagnostico.setColumns(20);
+        campoDiagnostico.setRows(5);
+        jScrollPane3.setViewportView(campoDiagnostico);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
+        campoObservaciones.setColumns(20);
+        campoObservaciones.setRows(5);
+        jScrollPane4.setViewportView(campoObservaciones);
 
         jButton1.setText("Guardar ");
 
@@ -229,6 +230,9 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campoDNI;
+    private javax.swing.JTextArea campoDiagnostico;
+    private javax.swing.JTextArea campoObservaciones;
+    private javax.swing.JTextArea campoTratamiento;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -242,11 +246,17 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
     // End of variables declaration//GEN-END:variables
 
+    String dni, diagnostico, tratamiento, observaciones;
+    
+    void nuevoInforme_Vgil() {
+    
+        if (UtilidadesVgil.campoVacio_Vgil(campoDNI)){
+        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
+        }else (UtilidadesVgil.campoVacio_Vgil(campoDiagnostico)){}
+        
+    }
     
 
 

@@ -21,6 +21,7 @@ import modeloVgil.ConsultaEnfermeriaVgil;
 import modeloVgil.PersonalVgil;
 import modeloVgil.PacienteVgil;
 import UtilidadesVgil.EncriptadoVgil;
+import static java.util.Calendar.DATE;
 
 public class ConexionVgil {
 
@@ -85,35 +86,15 @@ public class ConexionVgil {
         return false;
     }
 
-    public static boolean datosPersonal_Vgil() {
-        try {
-            String consulta = "SELECT numero_colegiado, nombre , apellidos , usuario , tipo FROM personal ";
-            PreparedStatement pst = conn.prepareStatement(consulta);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                // Procesa los resultados según sea necesario
-                System.out.println("Número de colegiado: " + rs.getString("numero_colegiado"));
-                System.out.println("Nombre: " + rs.getString("nombre"));
-                System.out.println("Apellidos: " + rs.getString("apellidos"));
-                System.out.println("Usuario: " + rs.getString("usuario"));
-                System.out.println("Tipo: " + rs.getString("tipo"));
-            }
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
     public static boolean acceder_Vgil(String usuario, String pass) {
         String consulta = "SELECT usuario, contrasenya FROM personal WHERE usuario=? AND contrasenya=?";
 
         try {
             Connection c = conectar_Vgil();
-              if (c == null) {
-            System.out.println("No se pudo establecer la conexión.");
-            return false;
-        }
+            if (c == null) {
+                System.out.println("No se pudo establecer la conexión.");
+                return false;
+            }
             PreparedStatement pst = conn.prepareStatement(consulta);
             pst.setString(1, usuario);
             pst.setString(2, pass);
@@ -125,6 +106,33 @@ public class ConexionVgil {
         }
     }
 
+    public static PacienteVgil recuperaDatosPrsona_Vgil(String dni) throws Exception {
+        PacienteVgil p = null ;
+
+        String consulta = "SELECT dni, nombre, apellidos, telefono, email FROM paciente WHERE dni = ?";
+
+        PreparedStatement pst;
+        ResultSet rs;
+        try {
+            pst = conn.prepareStatement(consulta);
+            pst.setString(1, dni);  // Asigna el valor del dni al parámetro de la consulta
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                p = new PacienteVgil(
+                        EncriptadoVgil.desencriptar_Vgil(rs.getString(2)),
+                        EncriptadoVgil.desencriptar_Vgil(rs.getString(3)),
+                        rs.getInt(4),
+                        rs.getString(5)
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return p;
+    }
+
     public static String[] recuperaDatosUsuariosLoqueados_Vgil(String user) {
         /**
          * Recupera los datos del usuario logado tomando como referencia el
@@ -132,59 +140,70 @@ public class ConexionVgil {
          * nombre y los apellidos , su DNI y el numero de colegiado, todo ello
          * en una array de tipo String con 3 posiciones
          */
-        String[] usuario = new String[4];
-    String consulta = "SELECT CONCAT(nombre, ' ', apellidos), numero_colegiado, tipo, fecha FROM personal WHERE usuario = ?";
+        String[] usuario = new String[3];
+        String consulta = "SELECT CONCAT(nombre, ' ', apellidos), numero_colegiado, tipo FROM personal WHERE usuario = ?";
 
-    try {
-        PreparedStatement st = conn.prepareStatement(consulta);
-        st.setString(1, user);
-        ResultSet rs = st.executeQuery();
-        if (rs.next()) {
-            usuario[0] = rs.getString(1); // Nombre y apellidos
-            usuario[1] = rs.getString(2); // Número colegiado
-            usuario[2] = rs.getString(3); // Tipo
-            usuario[3] = rs.getString(4); // Fecha
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    return usuario;
-}
-
-    public static void recuperaCitasMedicas_Vgil(DefaultTableModel modelo) throws SQLException, Exception {
-
-        /**
-         * Metodo que nos permitira obtener de la base de datos las citas
-         * medicas correspondientes a la fecha actual para cargarlas en una
-         * tabla
-         */
-        String consulta = "SELECT  nombre, dia, hora FROM citasenfermeria";
-        ResultSet rs = conn.createStatement().executeQuery(consulta);
-        while (rs.next()) {            
-            String nombre = EncriptadoVgil.desencriptar_Vgil(rs.getString("nombre"));
-            String fecha = rs.getString("dia");
-            String hora = rs.getString("hora");
-            Object[] citaMedica = {nombre, fecha, hora};
-            modelo.addRow(citaMedica);
-        }
-    }
-
-    public static void recuperarCitasEnfermeria_Vgil(DefaultTableModel modelo) throws Exception {
-
-        String consulta = "SELECT dniPaciente, nombre, dia, hora FROM citasenfermeria";
         try {
-            ResultSet rs = conn.createStatement().executeQuery(consulta);
-            while (rs.next()) {
-                String dniPaciente = EncriptadoVgil.desencriptar_Vgil(rs.getString("nombre"));
-                String nombre = rs.getString("nombre");
-                String fecha = rs.getString("dia");
-                String hora = rs.getString("hora");
-                Object[] citaMedica = {dniPaciente, nombre, fecha, hora};
-                modelo.addRow(citaMedica);
+            PreparedStatement st = conn.prepareStatement(consulta);
+            st.setString(1, user); // Establecer el valor del parámetro de la consulta
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                usuario[0] = rs.getString(1); // Nombre y apellidos
+                usuario[1] = rs.getString(2); // Número colegiado
+                usuario[2] = rs.getString(3); // Tipo         
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return usuario;
+    }
+
+    public static void cargarcitasMedicas_Vgil(DefaultTableModel modelo) {
+
+        try {
+            Object[] datos = new Object[3];
+            String consulta = " SELECT nombre, dia, hora from citas ";
+
+            ResultSet rs = conn.createStatement().executeQuery(consulta);
+            while (rs.next()) {
+                try {
+                    datos[0] = EncriptadoVgil.desencriptar_Vgil(rs.getString("nombre"));
+                } catch (Exception ex) {
+                    Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                datos[1] = rs.getString("dia");
+                datos[2] = rs.getString("hora");
+
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public static void cargarcitasEnfermeria_Vgil(DefaultTableModel modelo) {
+
+        try {
+            Object[] datos = new Object[3];
+            String consulta = " SELECT nombre, dia, hora from citasenfermeria";
+
+            ResultSet rs = conn.createStatement().executeQuery(consulta);
+            while (rs.next()) {
+                try {
+                    datos[0] = EncriptadoVgil.desencriptar_Vgil(rs.getString("nombre"));
+                } catch (Exception ex) {
+                    Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                datos[1] = rs.getString("dia");
+                datos[2] = rs.getString("hora");
+
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public static boolean registrarCitaMedica_Vgil(ConsultaEnfermeriaVgil consulta) {
@@ -220,7 +239,7 @@ public class ConexionVgil {
          * asociado a algun paciente
          */
         try {
-            String consulta = "SELECT dniPaciente from pacientes where dniPaciente =?";
+            String consulta = "SELECT dni from paciente where dni =?";
 
             PreparedStatement pst = conn.prepareStatement(consulta);
             ResultSet rs;
@@ -277,22 +296,24 @@ public class ConexionVgil {
     }
 
     public static boolean registrarPaciente_Vgil(PacienteVgil pa) {
-
-        String consultaInsert = "INSERT INTO paciente (dni, nombre, apellidos, fechaNacimiento , telefono, email, cp , sexo , tabaquismo, consumoAlcohol , antecedentesSalud, datosSaludGeneral, fechaRegistro)"
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String consultaInsert = "INSERT INTO paciente (dni, nombre, apellidos, fechaNacimiento, telefono, email, cp, sexo, tabaquismo, consumoAlcohol, antecedentesSalud, datosSaludGeneral, fechaRegistro)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement st = conn.prepareStatement(consultaInsert)) {
             st.setString(1, pa.getDniVgil());
             st.setString(2, pa.getNombreVgil());
             st.setString(3, pa.getApellidosVgil());
-            st.setString(4, String.valueOf(pa.getTelefonoVgil()));
-            st.setString(5, pa.getEmailVgil());
-            st.setString(6, String.valueOf(pa.getCpVgil()));
-            st.setString(7, pa.getTabaquismoVgil());
-            st.setString(8, pa.getConsumoalcholVgil());
-            st.setString(9, pa.getAntecedentesSaludVgil());
-            st.setString(10, pa.getDatosSaludGeneralVgil());
-            st.setString(11, pa.getFechaRegistroVgil());
+            st.setDate(4, (java.sql.Date) java.sql.Date.valueOf(LocalDate.MAX) pa.getFechaNacimientoVgil()
+            );
+        st.setInt(5, pa.getTelefonoVgil());
+            st.setString(6, pa.getEmailVgil());
+            st.setInt(7, pa.getCpVgil());
+            st.setString(8, pa.getSexoVgil());
+            st.setString(9, pa.getTabaquismoVgil());
+            st.setString(10, pa.getConsumoAlcoholVgil());
+            st.setString(11, pa.getAntecedentesSaludVgil());
+            st.setString(12, pa.getDatosSaludGeneralVgil());
+            st.setDate(13, (java.sql.Date) pa.getFechaRegistroVgil()); // Assuming LocalDateTime
 
             st.executeUpdate();
             return true;

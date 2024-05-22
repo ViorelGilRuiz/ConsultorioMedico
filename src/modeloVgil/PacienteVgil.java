@@ -151,6 +151,13 @@ public class PacienteVgil {
         this.telefonoVgil = telefonoVgil;
         this.emailVgil = emailVgil;
     }
+
+    public PacienteVgil(String nombreVgil, String apellidosVgil, int telefonoVgil, String emailVgil) {
+        this.nombreVgil = nombreVgil;
+        this.apellidosVgil = apellidosVgil;
+        this.telefonoVgil = telefonoVgil;
+        this.emailVgil = emailVgil;
+    }
     
     
     private String emailVgil;

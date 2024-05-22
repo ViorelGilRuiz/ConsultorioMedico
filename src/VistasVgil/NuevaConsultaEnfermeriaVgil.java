@@ -361,7 +361,7 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "Error al crear un nuevo informe ");
         }
-            
+            ConexionVgil.cerrarConexion_Vgil();
             
         }
     }

@@ -88,10 +88,7 @@ public class PacientesVgil extends javax.swing.JDialog {
 
         listadoPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "DNI", "Nombre", "Apellidos", "Telefono", "CP"

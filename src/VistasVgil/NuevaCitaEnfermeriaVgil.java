@@ -7,6 +7,8 @@ package VistasVgil;
 import java.util.Date;
 import UtilidadesVgil.UtilidadesVgil;
 import bbddVgil.ConexionVgil;
+import javax.swing.JOptionPane;
+import modeloVgil.CitaVgil;
 
 /**
  *
@@ -180,7 +182,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       nuevaCita_Vgil();
+        nuevaCita_Vgil();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -243,38 +245,38 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 
-    String dni,nom, ape;
+    String dni, nom, ape;
     Date fecha;
     Double hora;
-    
+
     void nuevaCita_Vgil() {
-    
+
         if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
-        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
-        }else if (UtilidadesVgil.campoVacio_Vgil(campoNombreyApellidos)) {
-        UtilidadesVgil.campoVacio_Vgil(campoNombreyApellidos);
-        }else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha)) {
-        UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha);
-        }else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)){
-        UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha);
-        }else {
-         
-          dni = campoDNI.getText();
-          nom = campoNombreyApellidos.getText();
-          fecha = (Date) campoFecha.getSelectedItem();
-          hora = Double.parseDouble(campoHora.getSelectedItem().toString());
-          
-          
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoNombreyApellidos)) {
+            UtilidadesVgil.campoVacio_Vgil(campoNombreyApellidos);
+        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha)) {
+            UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha);
+        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)) {
+            UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha);
+        } else {
+
+            dni = campoDNI.getText();
+            nom = campoNombreyApellidos.getText();
+            fecha = (Date) campoFecha.getSelectedItem();
+            hora = Double.parseDouble(campoHora.getSelectedItem().toString());
+
             ConexionVgil.conectar_Vgil();
-            
-            
-            
-          
-          
-            
+
+            CitaVgil nuevaCita = new CitaVgil(dni, nom, fecha, hora);
+
+            if (ConexionVgil.registrarCitaEnfermeria_Vgil(nuevaCita)) {
+                ConexionVgil.conectar_Vgil();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al crear una nueva cita");
+            }
+            ConexionVgil.cerrarConexion_Vgil();
         }
+
     }
-    
-
-
 }

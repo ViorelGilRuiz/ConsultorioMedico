@@ -8,6 +8,7 @@ import bbddVgil.ConexionVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import bbddVgil.ConexionVgil;
 import javax.swing.JOptionPane;
+import modeloVgil.CitaVgil;
 import modeloVgil.ConsultaEnfermeriaVgil;
 import modeloVgil.PacienteVgil;
 
@@ -105,6 +106,11 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
         });
 
         jButton1.setText("Buscar Paciente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Paciente "));
@@ -306,6 +312,11 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DNIActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ConexionVgil.conectar_Vgil();
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -374,6 +385,8 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
 
         if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
             JOptionPane.showMessageDialog(this, "El DNI es un cammpo es obligatorio por favor");
+        }else if (UtilidadesVgil.validacionLetraDni_Vgil(dni)){
+            JOptionPane.showMessageDialog(this, "El DNI no es valido ");
         } else if (UtilidadesVgil.campoVacio_Vgil(camponombre)) {
             JOptionPane.showMessageDialog(this, "El Nombre es un campo obligatorio por favor ");
         } else if (UtilidadesVgil.campoVacio_Vgil(CampoApellidos)) {
@@ -393,7 +406,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
 
             ConexionVgil.conectar_Vgil();
 
-            if (ConexionVgil.registrarCitaEnfermeria_Vgil()) {
+            if (ConexionVgil.registrarCitaEnfermeria_Vgil(cita)) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 

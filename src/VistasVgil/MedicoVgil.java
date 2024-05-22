@@ -9,8 +9,11 @@ import modeloVgil.ConsultaEnfermeriaVgil;
 import modeloVgil.PersonalVgil;
 import modeloVgil.PacienteVgil;
 import modeloVgil.ConsultaVgil;
+import bbddVgil.ConexionVgil;
 
 import UtilidadesVgil.UtilidadesVgil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -100,6 +103,11 @@ public class MedicoVgil extends javax.swing.JFrame {
         jLabel3.setText("DNI Paciente");
 
         jButton1.setText("Buscar Paciente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Paciente "));
@@ -194,10 +202,7 @@ public class MedicoVgil extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Diagnostico", "Tratamiento", "Observaciones"
@@ -300,6 +305,33 @@ public class MedicoVgil extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNombreActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    ConexionVgil.conectar_Vgil();
+
+if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
+    UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDni);
+} else if (!UtilidadesVgil.confirmaacionDNI_Vgil(campoDni)) {
+    JOptionPane.showMessageDialog(this, "El DNI no es válido, introduzca uno válido por favor");
+} else {
+    try {
+        PacienteVgil paciente = ConexionVgil.recuperaDatosPrsona_Vgil(campoDni.getText());
+        if (paciente != null) {
+            campoNombre.setText(paciente.getNombreVgil());
+            campoApellidos.setText(paciente.getApellidosVgil());
+            campoTelefono.setText(String.valueOf((char) paciente.getTelefonoVgil())); // Convertir int a String
+            campoEmail.setText(paciente.getEmailVgil());
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
+            NuevaCitaVgil cita = new NuevaCitaVgil(this, rootPaneCheckingEnabled);
+            cita.setVisible(true);
+            
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(MedicoVgil.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -383,6 +415,8 @@ public class MedicoVgil extends javax.swing.JFrame {
             ape = campoApellidos.getText();
             tele = Integer.parseInt(campoTelefono.getText());
             ema = campoEmail.getText();
+            
+            PacienteVgil paciente = new PacienteVgil(nom, ape, tele, ema);
         }
     }
 

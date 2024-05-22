@@ -6,7 +6,10 @@ package VistasVgil;
 
 import bbddVgil.ConexionVgil;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,41 +17,51 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MenuPrincipalVgil extends javax.swing.JFrame {
 
+    DefaultTableModel mod;
     /**
      * Creates new form MenuPrincipalVgil
      */
-    public MenuPrincipalVgil() {
-        initComponents();
+    public MenuPrincipalVgil() throws Exception {
+    initComponents();
 
-        mod = (DefaultTableModel) citasdeHoy.getModel();
+    mod = (DefaultTableModel) citasdeHoy.getModel();
 
-        Date fecha = new Date();
-        campoFecha.setText(fecha.toString());
-        if ("MEDICO".equals(LoginVgil.datosPersona_Vgil[2])) {
-            CampoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
-            campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil);
-            citasdeHoy.setText("AGENDA DE CITAS MEDICAS");
+    Date fecha = new Date();
+    campoFecha.setText(fecha.toString());
+    String userType = LoginVgil.datosPersona_Vgil[2]; // Tipo de usuario
+
+    switch (userType) {
+        case "MEDICO":
+            campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
+            campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
+            campoAgenda.setText("AGENDA DE CITAS MEDICAS");
             botonConsultas.setEnabled(true);
             botonPacientes.setEnabled(true);
             ConexionVgil.conectar_Vgil();
-            ConexionVgil.recuperaCitasMedicas_Vgil(mod);
+            ConexionVgil.cargarcitasMedicas_Vgil(mod);
             ConexionVgil.cerrarConexion_Vgil();
-        } else if ("ENFERMERIA".equals(ConexionVgil.datosPersonal_Vgil()[2) {
-            CampoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil);
+            break;
+
+        case "ENFERMERIA":
+            campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
             campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
-            citasdeHoy.setText("AGENDA DE CITAS DE ENFERMERIA");
+            campoAgenda.setText("AGENDA DE CITAS DE ENFERMERIA");
             botonEnfermeria.setEnabled(true);
             ConexionVgil.conectar_Vgil();
-            ConexionVgil.cargarcitasEnfermeria(mod);
+            ConexionVgil.cargarcitasEnfermeria_Vgil(mod);
             ConexionVgil.cerrarConexion_Vgil();
-        } else if ("ADMIN".equals(LoginVgil.datosPersona_Vgil[2])) {
-            CampoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
-            campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
-            botonPersonalMedico.setEnabled(true);
-            ConexionVgil.cerrarConexion_Vgil();
+            break;
 
-        }
+        default:
+            if ("ADMIN".equals(LoginVgil.datosPersona_Vgil[3])) {
+                campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
+                campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
+                botonPersonalMedico.setEnabled(true);
+                ConexionVgil.cerrarConexion_Vgil();
+            }
+            break;
     }
+}
 
         /**
          * This method is called from within the constructor to initialize the
@@ -62,10 +75,9 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         campoFecha = new javax.swing.JLabel();
-        CampoNombreFacultativo = new javax.swing.JLabel();
-        campoNumeroColegiado = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        campoNombreFacultativo = new javax.swing.JLabel();
+        campoNumeroColegiado = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         botonPacientes = new javax.swing.JButton();
         botonEnfermeria = new javax.swing.JButton();
@@ -74,59 +86,59 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         citasdeHoy = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
+        campoAgenda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         campoFecha.setText("jLabel1");
 
-        CampoNombreFacultativo.setText("jLabel2");
-
-        campoNumeroColegiado.setText("jLabel3");
-
-        jLabel4.setText("jLabel4");
-
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo_good.png"))); // NOI18N
         jLabel5.setText("jLabel5");
+
+        campoNombreFacultativo.setText("jLabel1");
+
+        campoNumeroColegiado.setText("jLabel1");
+        campoNumeroColegiado.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(campoNumeroColegiado)
-                    .addComponent(CampoNombreFacultativo)
-                    .addComponent(campoFecha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(campoFecha)
+                    .addComponent(campoNombreFacultativo)
+                    .addComponent(campoNumeroColegiado))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 803, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(campoFecha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CampoNombreFacultativo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoNumeroColegiado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(campoFecha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoNombreFacultativo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoNumeroColegiado)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(12, Short.MAX_VALUE)
+                        .addComponent(jLabel5)))
                 .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setEnabled(false);
 
         botonPacientes.setBackground(new java.awt.Color(0, 102, 255));
         botonPacientes.setForeground(new java.awt.Color(255, 255, 255));
         botonPacientes.setText("PACIENTES");
+        botonPacientes.setEnabled(false);
         botonPacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPacientesActionPerformed(evt);
@@ -136,6 +148,7 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
         botonEnfermeria.setBackground(new java.awt.Color(0, 102, 255));
         botonEnfermeria.setForeground(new java.awt.Color(255, 255, 255));
         botonEnfermeria.setText("ENFERMERÍA");
+        botonEnfermeria.setEnabled(false);
         botonEnfermeria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEnfermeriaActionPerformed(evt);
@@ -145,6 +158,7 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
         botonPersonalMedico.setBackground(new java.awt.Color(0, 102, 255));
         botonPersonalMedico.setForeground(new java.awt.Color(255, 255, 255));
         botonPersonalMedico.setText("PERSONAL MÉDICO");
+        botonPersonalMedico.setEnabled(false);
         botonPersonalMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPersonalMedicoActionPerformed(evt);
@@ -154,6 +168,7 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
         botonConsultas.setBackground(new java.awt.Color(0, 102, 255));
         botonConsultas.setForeground(new java.awt.Color(255, 255, 255));
         botonConsultas.setText("CONSULTAS");
+        botonConsultas.setEnabled(false);
         botonConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConsultasActionPerformed(evt);
@@ -165,10 +180,7 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
 
         citasdeHoy.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nombre", "Día", "Hora"
@@ -176,9 +188,9 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(citasdeHoy);
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Agenda de citas médicas");
+        campoAgenda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        campoAgenda.setForeground(new java.awt.Color(255, 255, 255));
+        campoAgenda.setText("Agenda de citas médicas");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -197,8 +209,8 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoAgenda, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89))
@@ -212,13 +224,13 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
                     .addComponent(botonPersonalMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonEnfermeria, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(90, 90, 90))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(campoAgenda)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60))))
@@ -305,24 +317,27 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipalVgil().setVisible(true);
+                try {
+                    new MenuPrincipalVgil().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(MenuPrincipalVgil.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CampoNombreFacultativo;
     private javax.swing.JButton botonConsultas;
     private javax.swing.JButton botonEnfermeria;
     private javax.swing.JButton botonPacientes;
     private javax.swing.JButton botonPersonalMedico;
+    private javax.swing.JLabel campoAgenda;
     private javax.swing.JLabel campoFecha;
+    private javax.swing.JLabel campoNombreFacultativo;
     private javax.swing.JLabel campoNumeroColegiado;
     private javax.swing.JTable citasdeHoy;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
