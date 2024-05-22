@@ -211,10 +211,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
 
         HitorialdeconsultasMedicas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Máxima", "Minima", "Glucosa"
@@ -411,7 +408,7 @@ if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
     String dni, nom, ape, ema;
     int tel;
 
-    public void registrarConsultaEnfermeria_Vgil() {
+    public void registrarConsultaEnfermeria_Vgil() throws Exception {
 
         if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
             JOptionPane.showMessageDialog(this, "El DNI es un cammpo es obligatorio por favor");
@@ -426,8 +423,8 @@ if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
         } else if (UtilidadesVgil.campoVacio_Vgil(campoEmail)) {
             JOptionPane.showMessageDialog(this, "El correo electronico es un campo obligatorio por favor ");
         } else {
-            dni = DNI.getText();
-            nom = camponombre.getText();
+            dni = EncriptadoVgil.desencriptar_Vgil(DNI.getText());
+           camponombre.setText(EncriptadoVgil.desencriptar_Vgil(camponombre.getText()));
             ape = CampoApellidos.getText();
             tel = Integer.parseInt(campoTelefono.getText());
             ema = campoEmail.getText();
@@ -436,7 +433,7 @@ if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
 
             ConexionVgil.conectar_Vgil();
 
-            if (ConexionVgil.nuevaCitaEnfermeria_Vgil(citaenfermeria)) {
+            if (ConexionVgil.nuevaCitaEnfermeria_Vgil(CitaVgil )) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 

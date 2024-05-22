@@ -18,6 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
  * @author oceans
  */
 import org.apache.commons.codec.binary.Base64;
+
 public class EncriptadoVgil {
     
     private static final String MILLAVE = "vJMnURwFuojTiaJT";

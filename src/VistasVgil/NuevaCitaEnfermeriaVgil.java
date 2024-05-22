@@ -252,56 +252,52 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     Date fecha;
     Double hora;
 
-    public void nuevaCita_Vgil()  {
+    public void nuevaCita_Vgil() {
 
         if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
         } else if (UtilidadesVgil.campoVacio_Vgil(campoNombre)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoNombre);
-        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha)) {
-            UtilidadesVgil.alertaComboNoSeleccionado_Vgil(this, campoFecha);
-        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)) {
-            JOptionPane.showMessageDialog(this, "Debes seleccionar una hora por favor");
+        } else if (campoFecha.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar una fecha, por favor.");
+        } else if (campoHora.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar una hora, por favor.");
         } else {
 
-           
             try {
                 String dni = EncriptadoVgil.encriptar_Vgil(campoDNI.getText());
                 String nombre = EncriptadoVgil.encriptar_Vgil(campoNombre.getText());
                 switch (campoFecha.getSelectedItem().toString()) {
-
-                    case "Una Semana":
-                        fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 7);
-                        break;
-                    case "Dos Semanas":
-                        fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 14);
-                        break;
-                    case "Un Mes":
-                        fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 30);
-                        break;
-
+                    case "Una Semana" -> fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 7);
+                    case "Dos Semanas" -> fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 14);
+                    case "Un Mes" -> fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 30);
+                    default -> throw new IllegalArgumentException("Selección de fecha no válida");
                 }
-                hora = Double.parseDouble(campoHora.getSelectedItem().toString());
+
+                try {
+                    hora = Double.parseDouble(campoHora.getSelectedItem().toString());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Formato de hora no válido. Por favor, selecciona una hora correcta.");
+                    return;
+                }
 
                 // Crear una nueva cita
                 CitaVgil cita = new CitaVgil(dni, nombre, fecha, hora);
                 ConexionVgil.conectar_Vgil();
 
                 if (ConexionVgil.registrarCitaMedica_Vgil(cita)) {
-
                     JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
-
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
                 }
                 ConexionVgil.cerrarConexion_Vgil();
             } catch (Exception ex) {
                 Logger.getLogger(NuevaCitaEnfermeriaVgil.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Ocurrió un error: " + ex.getMessage());
             }
-           
+
         }
 
     }
-
 }
 

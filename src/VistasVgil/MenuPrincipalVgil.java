@@ -24,62 +24,66 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
      * Creates new form MenuPrincipalVgil
      */
     public MenuPrincipalVgil() throws Exception {
-    initComponents();
+        initComponents();
 
-    mod = (DefaultTableModel) citasdeHoy.getModel();
+        mod = (DefaultTableModel) citasdeHoy.getModel();
 
-    Date fecha = new Date();
-    campoFecha.setText(fecha.toString());
-    String userType = LoginVgil.datosPersona_Vgil[2]; // Tipo de usuario
-    String userRole = LoginVgil.datosPersona_Vgil[3]; // Rol del usuario (ADMIN)
+        Date fecha = new Date();
+        campoFecha.setText(fecha.toString());
 
-    if (userType == null || userType.isEmpty() || userRole == null || userRole.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No se introdujo usuario y/o contraseña. Por favor, intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
-    } else {
-        switch (userType) {
-            case "MEDICO":
-                campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
-                campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
-                campoAgenda.setText("AGENDA DE CITAS MEDICAS");
-                botonConsultas.setEnabled(true);
-                botonPacientes.setEnabled(true);
-                ConexionVgil.conectar_Vgil();
-                ConexionVgil.cargarcitasMedicas_Vgil(mod);
-                ConexionVgil.cerrarConexion_Vgil();
-                break;
+        // Verificar si datosPersona_Vgil está bien inicializado
+        if (LoginVgil.datosPersona_Vgil == null || LoginVgil.datosPersona_Vgil.length < 3) {
+            JOptionPane.showMessageDialog(this, "Datos del usuario incompletos. Por favor, intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-            case "ENFERMERIA":
-                campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
-                campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
-                campoAgenda.setText("AGENDA DE CITAS DE ENFERMERIA");
-                botonEnfermeria.setEnabled(true);
-                ConexionVgil.conectar_Vgil();
-                ConexionVgil.cargarcitasEnfermeria_Vgil(mod);
-                ConexionVgil.cerrarConexion_Vgil();
-                break;
+        String userType = LoginVgil.datosPersona_Vgil[2]; // Tipo de usuario
 
-            case "ADMIN":
-                campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
-                campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
-                botonPersonalMedico.setEnabled(true);
-                ConexionVgil.cerrarConexion_Vgil();
-                break;
+        if (userType == null || userType.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se introdujo usuario y/o contraseña. Por favor, intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            switch (userType) {
+                case "MEDICO":
+                    campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
+                    campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
+                    campoAgenda.setText("AGENDA DE CITAS MEDICAS");
+                    botonConsultas.setEnabled(true);
+                    botonPacientes.setEnabled(true);
+                    ConexionVgil.conectar_Vgil();
+                    ConexionVgil.cargarcitasMedicas_Vgil(mod);
+                    ConexionVgil.cerrarConexion_Vgil();
+                    break;
 
-            default:
-                JOptionPane.showMessageDialog(this, "Tipo de usuario no reconocido. Por favor, intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
-                break;
+                case "ENFERMERIA":
+                    campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
+                    campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
+                    campoAgenda.setText("AGENDA DE CITAS DE ENFERMERIA");
+                    botonEnfermeria.setEnabled(true);
+                    ConexionVgil.conectar_Vgil();
+                    ConexionVgil.cargarcitasEnfermeria_Vgil(mod);
+                    ConexionVgil.cerrarConexion_Vgil();
+                    break;
+
+                case "ADMIN":
+                    campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
+                    campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
+                    botonPersonalMedico.setEnabled(true);
+                    ConexionVgil.cerrarConexion_Vgil();
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(this, "Tipo de usuario no reconocido. Por favor, intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
         }
     }
-}
 
-
-
-        /**
-         * This method is called from within the constructor to initialize the
-         * form. WARNING: Do NOT modify this code. The content of this method is
-         * always regenerated by the Form Editor.
-         */
-        @SuppressWarnings("unchecked")
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
