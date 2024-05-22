@@ -4,9 +4,12 @@
  */
 package VistasVgil;
 
+import UtilidadesVgil.EncriptadoVgil;
 import java.util.Date;
 import UtilidadesVgil.UtilidadesVgil;
 import bbddVgil.ConexionVgil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modeloVgil.CitaVgil;
 
@@ -43,7 +46,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         campoDNI = new javax.swing.JTextField();
-        campoNombreyApellidos = new javax.swing.JTextField();
+        campoNombre = new javax.swing.JTextField();
         campoHora = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         campoFecha = new javax.swing.JComboBox<>();
@@ -94,7 +97,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Hora");
 
-        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "9:00", "9.30", "10.00", "10.30", "11.00", "11.30", "12.00", "12.30", "13.00", "13.30", "14.00", " " }));
 
         jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +123,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoNombreyApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(campoFecha, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -137,7 +140,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(campoNombreyApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -232,7 +235,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     private javax.swing.JTextField campoDNI;
     private javax.swing.JComboBox<String> campoFecha;
     private javax.swing.JComboBox<String> campoHora;
-    private javax.swing.JTextField campoNombreyApellidos;
+    private javax.swing.JTextField campoNombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -245,38 +248,60 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 
-    String dni, nom, ape;
+    String dni, nom;
     Date fecha;
     Double hora;
 
-    void nuevaCita_Vgil() {
+    public void nuevaCita_Vgil()  {
 
         if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
-        } else if (UtilidadesVgil.campoVacio_Vgil(campoNombreyApellidos)) {
-            UtilidadesVgil.campoVacio_Vgil(campoNombreyApellidos);
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoNombre)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoNombre);
         } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha)) {
-            UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha);
+            UtilidadesVgil.alertaComboNoSeleccionado_Vgil(this, campoFecha);
         } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campoHora)) {
-            UtilidadesVgil.comboNoSeleccionado_Vgil(campoFecha);
+            JOptionPane.showMessageDialog(this, "Debes seleccionar una hora por favor");
         } else {
 
-            dni = campoDNI.getText();
-            nom = campoNombreyApellidos.getText();
-            fecha = (Date) campoFecha.getSelectedItem();
-            hora = Double.parseDouble(campoHora.getSelectedItem().toString());
+           
+            try {
+                String dni = EncriptadoVgil.encriptar_Vgil(campoDNI.getText());
+                String nombre = EncriptadoVgil.encriptar_Vgil(campoNombre.getText());
+                switch (campoFecha.getSelectedItem().toString()) {
 
-            ConexionVgil.conectar_Vgil();
+                    case "Una Semana":
+                        fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 7);
+                        break;
+                    case "Dos Semanas":
+                        fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 14);
+                        break;
+                    case "Un Mes":
+                        fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 30);
+                        break;
 
-            CitaVgil nuevaCita = new CitaVgil(dni, nom, fecha, hora);
+                }
+                hora = Double.parseDouble(campoHora.getSelectedItem().toString());
 
-            if (ConexionVgil.registrarCitaEnfermeria_Vgil(nuevaCita)) {
+                // Crear una nueva cita
+                CitaVgil cita = new CitaVgil(dni, nombre, fecha, hora);
                 ConexionVgil.conectar_Vgil();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al crear una nueva cita");
+
+                if (ConexionVgil.registrarCitaMedica_Vgil(cita)) {
+
+                    JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
+                }
+                ConexionVgil.cerrarConexion_Vgil();
+            } catch (Exception ex) {
+                Logger.getLogger(NuevaCitaEnfermeriaVgil.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ConexionVgil.cerrarConexion_Vgil();
+           
         }
 
     }
+
 }
+

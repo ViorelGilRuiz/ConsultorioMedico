@@ -347,10 +347,10 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
         } else {
 
             dni = campoDNI.getText();
-            max = Double.parseDouble(campoMaxima.getText().toString());
-            min = Double.parseDouble(campoMinima.getText().toString());
-            glu = Double.parseDouble(campoNiveldeGlucosa.getText().toString());
-            pes = Double.parseDouble(campoPeso.getText().toString());
+            max = Double.valueOf(campoMaxima.getText());
+            min = Double.valueOf(campoMinima.getText());
+            glu = Double.valueOf(campoNiveldeGlucosa.getText());
+            pes = Double.valueOf(campoPeso.getText());
             
             ConexionVgil.conectar_Vgil();
             

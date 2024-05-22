@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 public class MenuPrincipalVgil extends javax.swing.JFrame {
 
     DefaultTableModel mod;
+
     /**
      * Creates new form MenuPrincipalVgil
      */
@@ -29,39 +31,48 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
     Date fecha = new Date();
     campoFecha.setText(fecha.toString());
     String userType = LoginVgil.datosPersona_Vgil[2]; // Tipo de usuario
+    String userRole = LoginVgil.datosPersona_Vgil[3]; // Rol del usuario (ADMIN)
 
-    switch (userType) {
-        case "MEDICO":
-            campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
-            campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
-            campoAgenda.setText("AGENDA DE CITAS MEDICAS");
-            botonConsultas.setEnabled(true);
-            botonPacientes.setEnabled(true);
-            ConexionVgil.conectar_Vgil();
-            ConexionVgil.cargarcitasMedicas_Vgil(mod);
-            ConexionVgil.cerrarConexion_Vgil();
-            break;
+    if (userType == null || userType.isEmpty() || userRole == null || userRole.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No se introdujo usuario y/o contraseña. Por favor, intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        switch (userType) {
+            case "MEDICO":
+                campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
+                campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
+                campoAgenda.setText("AGENDA DE CITAS MEDICAS");
+                botonConsultas.setEnabled(true);
+                botonPacientes.setEnabled(true);
+                ConexionVgil.conectar_Vgil();
+                ConexionVgil.cargarcitasMedicas_Vgil(mod);
+                ConexionVgil.cerrarConexion_Vgil();
+                break;
 
-        case "ENFERMERIA":
-            campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
-            campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
-            campoAgenda.setText("AGENDA DE CITAS DE ENFERMERIA");
-            botonEnfermeria.setEnabled(true);
-            ConexionVgil.conectar_Vgil();
-            ConexionVgil.cargarcitasEnfermeria_Vgil(mod);
-            ConexionVgil.cerrarConexion_Vgil();
-            break;
+            case "ENFERMERIA":
+                campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
+                campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
+                campoAgenda.setText("AGENDA DE CITAS DE ENFERMERIA");
+                botonEnfermeria.setEnabled(true);
+                ConexionVgil.conectar_Vgil();
+                ConexionVgil.cargarcitasEnfermeria_Vgil(mod);
+                ConexionVgil.cerrarConexion_Vgil();
+                break;
 
-        default:
-            if ("ADMIN".equals(LoginVgil.datosPersona_Vgil[3])) {
+            case "ADMIN":
                 campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
                 campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
                 botonPersonalMedico.setEnabled(true);
                 ConexionVgil.cerrarConexion_Vgil();
-            }
-            break;
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(this, "Tipo de usuario no reconocido. Por favor, intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+        }
     }
 }
+
+
 
         /**
          * This method is called from within the constructor to initialize the
@@ -111,7 +122,7 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
                     .addComponent(campoFecha)
                     .addComponent(campoNombreFacultativo)
                     .addComponent(campoNumeroColegiado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 803, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
         );

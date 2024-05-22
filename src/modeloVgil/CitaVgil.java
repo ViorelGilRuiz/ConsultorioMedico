@@ -63,4 +63,6 @@ public class CitaVgil {
     Date diaVgil;
     double horaVgil;
     
+    
+    
 }

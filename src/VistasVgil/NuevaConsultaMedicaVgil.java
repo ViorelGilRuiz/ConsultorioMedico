@@ -5,6 +5,12 @@
 package VistasVgil;
 
 import UtilidadesVgil.UtilidadesVgil;
+import static VistasVgil.MedicoVgil.dni;
+import bbddVgil.ConexionVgil;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import modeloVgil.ConsultaVgil;
+
 /**
  *
  * @author oceans
@@ -17,6 +23,8 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
     public NuevaConsultaMedicaVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        campoDNI.setText(dni);
+        
     }
 
     /**
@@ -94,17 +102,25 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
 
         campoTratamiento.setColumns(20);
         campoTratamiento.setRows(5);
+        campoTratamiento.setName("Tratamiento"); // NOI18N
         jScrollPane1.setViewportView(campoTratamiento);
 
         campoDiagnostico.setColumns(20);
         campoDiagnostico.setRows(5);
+        campoDiagnostico.setName("Diagnostico"); // NOI18N
         jScrollPane3.setViewportView(campoDiagnostico);
 
         campoObservaciones.setColumns(20);
         campoObservaciones.setRows(5);
+        campoObservaciones.setName("Observaciones"); // NOI18N
         jScrollPane4.setViewportView(campoObservaciones);
 
         jButton1.setText("Guardar ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -186,6 +202,10 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        registar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -248,17 +268,37 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 
-    String dni, diagnostico, tratamiento, observaciones;
-    
-    void nuevoInforme_Vgil() {
-    
-        if (UtilidadesVgil.campoVacio_Vgil(campoDNI)){
-        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
-        }else (UtilidadesVgil.campoVacio_Vgil(campoDiagnostico)){}
-        
+    String diag;
+    String trat;
+    String obser;
+    Date fecha = new Date();
+    int colegiado;
+
+    public void registar() {
+
+        if (UtilidadesVgil.areaVacia_Vgil(campoDiagnostico)) {
+            JOptionPane.showMessageDialog(this, "campo obligatorio");
+        } else if (UtilidadesVgil.areaVacia_Vgil(campoObservaciones)) {
+            JOptionPane.showMessageDialog(this, "campo abligatorio");
+        } else if (UtilidadesVgil.areaVacia_Vgil(campoTratamiento)) {
+            JOptionPane.showMessageDialog(this, "campo obligatorio");
+        } else {
+            String dnii = campoDNI.getText();
+            diag = campoDiagnostico.getText();
+            trat = campoTratamiento.getText();
+            obser = campoObservaciones.getText();
+            colegiado = Integer.parseInt(LoginVgil.datosPersona_Vgil[1]);
+
+            ConsultaVgil cg = new ConsultaVgil(dnii, fecha, diag, trat, obser, colegiado);
+            ConexionVgil.conectar_Vgil();
+
+            if (ConexionVgil.registrarConsultaMedica_Informe_Vgil(cg)) {
+                JOptionPane.showMessageDialog(this, "Registro realizado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error en la acción de registro. Inténtelo más tarde o póngase en contacto con el administrador del sistema");
+            }
+            ConexionVgil.cerrarConexion_Vgil();
+        }
+
     }
-    
-
-
-
 }

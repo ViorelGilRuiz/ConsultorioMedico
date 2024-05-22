@@ -13,11 +13,14 @@ import java.awt.Component;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -41,12 +44,22 @@ public class UtilidadesVgil {
         return campo.getText().isBlank();
     }
     
+    
+    public static boolean areaVacia_Vgil(JTextArea campo) {
+        return campo.getText().isBlank();
+    }
+    
+    public static boolean lanzaAlertaAreaVacia_Vgil(JTextArea campo) {
+        JOptionPane.showMessageDialog(null, "El campo " + campo.getName() + " es obligatorio");
+        return false;
+    }
 
 
     public static boolean lanzaAlertaCampoVacio_Vgil(JTextField campo) {
         JOptionPane.showMessageDialog(null, "El campo " + campo.getName() + " es obligatorio");
         return false;
     }
+    
 
     public static boolean confirmaacionDNI_Vgil(JTextField campo) {
 
@@ -129,6 +142,12 @@ public class UtilidadesVgil {
         }
         return false;
     }
-    
+    public static Date sumarRestarDiasFecha_Vgil(Date fecha, int dias) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.DAY_OF_YEAR, dias);
+        return calendar.getTime();
+}
     
 }

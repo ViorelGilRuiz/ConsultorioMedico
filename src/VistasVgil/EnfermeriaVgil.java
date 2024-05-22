@@ -4,10 +4,14 @@
  */
 package VistasVgil;
 
+import UtilidadesVgil.EncriptadoVgil;
 import bbddVgil.ConexionVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import bbddVgil.ConexionVgil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modeloVgil.CitaVgil;
 import modeloVgil.ConsultaEnfermeriaVgil;
 import modeloVgil.PacienteVgil;
@@ -18,6 +22,7 @@ import modeloVgil.PacienteVgil;
  */
 public class EnfermeriaVgil extends javax.swing.JFrame {
 
+    DefaultTableModel modelo;
     /**
      * Creates new form EnfermeriaVgil
      */
@@ -314,6 +319,31 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ConexionVgil.conectar_Vgil();
+
+if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
+    UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(DNI);
+} else if (!UtilidadesVgil.confirmaacionDNI_Vgil(DNI)) {
+    JOptionPane.showMessageDialog(this, "El DNI no es válido, introduzca uno válido por favor");
+} else {
+    try {
+        PacienteVgil paciente = ConexionVgil.recuperaDatosPrsona_Vgil(DNI.getText());
+        if (paciente != null) {
+            camponombre.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getNombreVgil()));
+            CampoApellidos.setText(paciente.getApellidosVgil());
+            campoTelefono.setText(String.valueOf(paciente.getTelefonoVgil())); // Convertir int a String
+            campoEmail.setText(paciente.getEmailVgil());
+            modelo = (DefaultTableModel) HitorialdeconsultasMedicas.getModel();
+            ConexionVgil.cargarcitasEnfermeria_Vgil(modelo);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
+            NuevaCitaEnfermeriaVgil cita = new NuevaCitaEnfermeriaVgil(this, rootPaneCheckingEnabled);
+            cita.setVisible(true);
+            
+        }
+    } catch (Exception ex) {
+        Logger.getLogger(MedicoVgil.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -406,7 +436,7 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
 
             ConexionVgil.conectar_Vgil();
 
-            if (ConexionVgil.registrarCitaEnfermeria_Vgil(cita)) {
+            if (ConexionVgil.nuevaCitaEnfermeria_Vgil(citaenfermeria)) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
 

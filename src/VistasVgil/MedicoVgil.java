@@ -10,23 +10,29 @@ import modeloVgil.PersonalVgil;
 import modeloVgil.PacienteVgil;
 import modeloVgil.ConsultaVgil;
 import bbddVgil.ConexionVgil;
+import UtilidadesVgil.EncriptadoVgil;
 
 import UtilidadesVgil.UtilidadesVgil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author oceans
  */
 public class MedicoVgil extends javax.swing.JFrame {
-
+    public static String dni;
+    DefaultTableModel modelo;
     /**
      * Creates new form EnfermeriaVgil
      */
     public MedicoVgil() {
         initComponents();
+        
+        
     }
 
     /**
@@ -59,7 +65,7 @@ public class MedicoVgil extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -200,7 +206,7 @@ public class MedicoVgil extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Historial de cosultas medicas");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -208,7 +214,7 @@ public class MedicoVgil extends javax.swing.JFrame {
                 "Fecha", "Diagnostico", "Tratamiento", "Observaciones"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla);
 
         jButton2.setText("Actualizar Tabla ");
 
@@ -316,10 +322,13 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
     try {
         PacienteVgil paciente = ConexionVgil.recuperaDatosPrsona_Vgil(campoDni.getText());
         if (paciente != null) {
-            campoNombre.setText(paciente.getNombreVgil());
+            dni = campoDni.getText();
+            campoNombre.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getNombreVgil()));
             campoApellidos.setText(paciente.getApellidosVgil());
-            campoTelefono.setText(String.valueOf((char) paciente.getTelefonoVgil())); // Convertir int a String
+            campoTelefono.setText(String.valueOf(paciente.getTelefonoVgil())); // Convertir int a String
             campoEmail.setText(paciente.getEmailVgil());
+            modelo = (DefaultTableModel) tabla.getModel();
+            ConexionVgil.cargarTablaConsultasMedicas_Vgil(modelo, dni);
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
             NuevaCitaVgil cita = new NuevaCitaVgil(this, rootPaneCheckingEnabled);
@@ -391,10 +400,10 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 
-    String dni, nom, ape, ema;
+    String  nom, ape, ema;
     int tele;
 
     public void consultaMedica_Vgil() {
@@ -417,6 +426,8 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
             ema = campoEmail.getText();
             
             PacienteVgil paciente = new PacienteVgil(nom, ape, tele, ema);
+        
+            ConexionVgil.conectar_Vgil();
         }
     }
 
