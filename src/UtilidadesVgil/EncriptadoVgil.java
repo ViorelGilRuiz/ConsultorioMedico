@@ -41,8 +41,8 @@ public class EncriptadoVgil {
 
         Key millaveenBytes = new SecretKeySpec(MILLAVE.getBytes(), "AES");
 
-        Cipher encriptador = Cipher.getInstance("AES");
-        encriptador.init(Cipher.ENCRYPT_MODE, millaveenBytes);
+       Cipher encriptador = Cipher.getInstance("AES");
+        encriptador.init(Cipher.DECRYPT_MODE, millaveenBytes);
 
         String desencriptado = new String(encriptador.doFinal(bystesEncriptados));
 

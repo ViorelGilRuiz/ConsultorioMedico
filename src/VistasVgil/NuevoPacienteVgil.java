@@ -539,10 +539,11 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Debes seleccionar una fecha por favor");
         } else if (UtilidadesVgil.campoVacio_Vgil(campoTelefefono)) {
             UtilidadesVgil.LazarAlertaCampoNumerico_Vgil(this, campoTelefefono);
-        }else if (UtilidadesVgil.campoVacio_Vgil(campoEmail)){
+        } else if (UtilidadesVgil.campoVacio_Vgil(campoEmail)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoEmail);
-        }else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campocCodigoPostal)) {
-        UtilidadesVgil.alertaComboNoSeleccionado_Vgil(campocCodigoPostal);
-        }else if ()
+        } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campocCodigoPostal)) {
+            UtilidadesVgil.alertaComboNoSeleccionado_Vgil(campocCodigoPostal);
+        } else {
+        }
     }
 }

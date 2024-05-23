@@ -68,6 +68,8 @@ public class MenuPrincipalVgil extends javax.swing.JFrame {
                     campoNombreFacultativo.setText("Facultativo " + LoginVgil.datosPersona_Vgil[0]);
                     campoNumeroColegiado.setText("Numero del colegiado " + LoginVgil.datosPersona_Vgil[1]);
                     botonPersonalMedico.setEnabled(true);
+                    ConexionVgil.conectar_Vgil();
+                    ConexionVgil.cargarcitasMedicas_Vgil(mod);
                     ConexionVgil.cerrarConexion_Vgil();
                     break;
 

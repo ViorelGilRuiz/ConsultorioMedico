@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package VistasVgil;
-
+import UtilidadesVgil.UtilidadEmailVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import bbddVgil.ConexionVgil;
 import java.lang.System.Logger;
@@ -13,6 +13,7 @@ import modeloVgil.CitaVgil;
 import modeloVgil.ConsultaVgil;
 import modeloVgil.PacienteVgil;
 import UtilidadesVgil.EncriptadoVgil;
+
 
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
     public NuevaCitaVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        campoDNI.setText(Dni);
     }
 
     /**
@@ -101,7 +103,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Hora");
 
-        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "8.3", "12.3", " " }));
+        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "8.00", "8.30", "9.00", "9.30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", " ", " " }));
 
         jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +190,7 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            nuevaCita_Vgil();
+            nuevaCita_Vgil();           
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(NuevaCitaVgil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

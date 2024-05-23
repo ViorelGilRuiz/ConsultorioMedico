@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package VistasVgil;
-
+import UtilidadesVgil.UtilidadEmailVgil;
 import UtilidadesVgil.EncriptadoVgil;
 import java.util.Date;
 import UtilidadesVgil.UtilidadesVgil;
@@ -186,6 +186,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         nuevaCita_Vgil();
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
