@@ -25,6 +25,9 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        ConexionVgil.conectar_Vgil();
+        ConexionVgil.cargarCombocp_Vgil(campocCodigoPostal);
+        
     }
 
     /**
@@ -573,7 +576,8 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
             FechaNac = fechaNacimiento.getDate();
             tele = Integer.parseInt(campoTelefefono.getText());
             email = campoEmail.getText();
-            cp = (int) campocCodigoPostal.getSelectedItem();
+            int cp = Integer.parseInt((String) campocCodigoPostal.getSelectedItem());            
+            
             antecedentes = antecendentesPaciente.getText();
             alergias = alergiasPaciente.getText();
 

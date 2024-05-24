@@ -7,7 +7,6 @@ package VistasVgil;
 import bbddVgil.ConexionVgil;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modeloVgil.CitaVgil;
 import modeloVgil.PacienteVgil;
 
 /**
@@ -17,6 +16,7 @@ import modeloVgil.PacienteVgil;
 public class PacientesVgil extends javax.swing.JDialog {
 
     DefaultTableModel modelo;
+
     /**
      * Creates new form PacientesVgil
      */
@@ -310,8 +310,7 @@ public class PacientesVgil extends javax.swing.JDialog {
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 
-
- public void cargardatosFila() {
+    public void cargardatosFila() {
 
         int fila = listadoPacientes.getSelectedRow();
 
@@ -330,24 +329,31 @@ public class PacientesVgil extends javax.swing.JDialog {
     }
 
     public void actualizar() {
+        try {
+            PacienteVgil p = new PacienteVgil(
+                    campoDNI.getText(),
+                    nombre.getText(),
+                    apellidos.getText(),
+                    Integer.parseInt(campotelefono.getText()), // Convertir teléfono a int
+                    Integer.parseInt(codigoPostal.getSelectedItem().toString()) // Convertir código postal a int
+            );
+            ConexionVgil.conectar_Vgil();
 
-        PacientesVgil paciente = new PacienteVgil(
-                nombre.getText(),
-                apellidos.getText(),                
-                Integer.parseInt(codigoPostal.getSelectedItem().toString())
-        );
+            if (ConexionVgil.actualizaDatos(p, campoDNI.getText())) {
+                JOptionPane.showMessageDialog(this, "Datos actualizados");
+                modelo.setRowCount(0); // Asegúrate de que 'modelo' está correctamente inicializado
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al actualizar los datos");
+            }
 
-        ConexionVgil.conectar_Vgil();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error en el formato de los datos: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
+        } finally {
+            ConexionVgil.cerrarConexion_Vgil();
 
-        if (ConexionVgil.actualizar(p, campoDNI.getText())) {
-            JOptionPane.showMessageDialog(this, "Datos actualizados");
-            modelo.setRowCount(0);
         }
 
-        ConexionVgil.actualizaDatos(p);
-
-        ConexionVgil.cerrarConexion_Vgil();
-
     }
-
 }

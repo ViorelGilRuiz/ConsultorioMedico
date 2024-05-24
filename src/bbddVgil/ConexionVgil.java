@@ -19,6 +19,7 @@ import modeloVgil.ConsultaEnfermeriaVgil;
 import modeloVgil.PersonalVgil;
 import modeloVgil.PacienteVgil;
 import UtilidadesVgil.EncriptadoVgil;
+import javax.swing.JComboBox;
 
 public class ConexionVgil {
 
@@ -370,16 +371,26 @@ public class ConexionVgil {
 
     }
 
-    public static void cargasCombocp_Vgil() {
+    public static void cargarCombocp_Vgil(JComboBox<String> comboCp) {
+        try {
+            conectar_Vgil();
+            String sql = "SELECT codigopostal FROM codigospostales";
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
 
-        /**
-         * Carglos los codigos postales asociados a los consultorios medicos
-         */
-        String consultaCp = "SELECT * FROM codigospostales";
+            while (rs.next()) {
+                comboCp.addItem(rs.getString("codigopostal"));
+            }
 
-        ConexionVgil.conectar_Vgil();
-
+            rs.close();
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cerrarConexion_Vgil();
+        }
     }
+    
 
     public static boolean registrarPaciente_Vgil(PacienteVgil pa) {
 
