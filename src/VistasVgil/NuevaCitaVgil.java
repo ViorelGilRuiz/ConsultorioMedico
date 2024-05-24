@@ -24,13 +24,15 @@ import javax.swing.JOptionPane;
  */
 public class NuevaCitaVgil extends javax.swing.JDialog {
 
+    
+    CitaVgil datos;
     /**
      * Creates new form NuevaCitaVgil
      */
     public NuevaCitaVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        campoDNI.setText(Dni);
+        
     }
 
     /**
@@ -190,7 +192,8 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            nuevaCita_Vgil();           
+            nuevaCita_Vgil();
+            UtilidadEmailVgil.enviaremailsimple(datos);
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(NuevaCitaVgil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

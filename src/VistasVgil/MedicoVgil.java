@@ -11,11 +11,15 @@ import modeloVgil.PacienteVgil;
 import modeloVgil.ConsultaVgil;
 import bbddVgil.ConexionVgil;
 import UtilidadesVgil.EncriptadoVgil;
+import VistasVgil.NuevoPacienteVgil;
 
 import UtilidadesVgil.UtilidadesVgil;
+import java.awt.Insets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -324,15 +328,16 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
         if (paciente != null) {
             dni = campoDni.getText();
             campoNombre.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getNombreVgil()));
-            campoApellidos.setText(paciente.getApellidosVgil());
+            campoApellidos.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getApellidosVgil()));
             campoTelefono.setText(String.valueOf(paciente.getTelefonoVgil())); // Convertir int a String
             campoEmail.setText(paciente.getEmailVgil());
             modelo = (DefaultTableModel) tabla.getModel();
             ConexionVgil.cargarTablaConsultasMedicas_Vgil(modelo, dni);
+            datosFila();
         } else {
             JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
-            NuevaCitaVgil cita = new NuevaCitaVgil(this, rootPaneCheckingEnabled);
-            cita.setVisible(true);
+           NuevoPacienteVgil p = new NuevoPacienteVgil(this, rootPaneCheckingEnabled);
+            p.setVisible(true);
             
         }
     } catch (Exception ex) {
@@ -430,6 +435,23 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
             ConexionVgil.conectar_Vgil();
         }
     }
+private void datosFila() {
 
+        String contenido = "FECHA DE CONSULTA: " + String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0));
+        contenido += "\n\nDIAGNÓSTICO:\n " + String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1));
+        contenido += "\n\nTRATAMIENTO:\n " + String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 2));
+        contenido += "\n\nOBSERVACIONES:\n " + String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 3));
+
+        JTextArea t = new JTextArea(20, 60);
+        t.setText(contenido);
+        t.setEditable(false);
+        t.setLineWrap(true);
+        t.setFocusable(false);
+        t.setAutoscrolls(true);
+        t.setMargin(new Insets(10, 10, 10, 10));
+
+        JOptionPane.showMessageDialog(this, new JScrollPane(t), "INFORME", 1);
+
+    }
 }
 

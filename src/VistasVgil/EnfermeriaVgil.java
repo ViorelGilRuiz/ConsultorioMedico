@@ -23,6 +23,7 @@ import modeloVgil.PacienteVgil;
 public class EnfermeriaVgil extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
+
     /**
      * Creates new form EnfermeriaVgil
      */
@@ -317,31 +318,31 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ConexionVgil.conectar_Vgil();
 
-if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
-    UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(DNI);
-} else if (!UtilidadesVgil.confirmaacionDNI_Vgil(DNI)) {
-    JOptionPane.showMessageDialog(this, "El DNI no es válido, introduzca uno válido por favor");
-} else {
-    try {
-        PacienteVgil paciente = ConexionVgil.recuperaDatosPrsona_Vgil(DNI.getText());
-        if (paciente != null) {
-            camponombre.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getNombreVgil()));
-            CampoApellidos.setText(paciente.getApellidosVgil());
-            campoTelefono.setText(String.valueOf(paciente.getTelefonoVgil())); // Convertir int a String
-            campoEmail.setText(paciente.getEmailVgil());
-            modelo = (DefaultTableModel) HitorialdeconsultasMedicas.getModel();
-            ConexionVgil.cargarcitasEnfermeria_Vgil(modelo);
+        if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(DNI);
+        } else if (!UtilidadesVgil.confirmaacionDNI_Vgil(DNI)) {
+            JOptionPane.showMessageDialog(this, "El DNI no es válido, introduzca uno válido por favor");
         } else {
-            JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
-            NuevaCitaEnfermeriaVgil cita = new NuevaCitaEnfermeriaVgil(this, rootPaneCheckingEnabled);
-            cita.setVisible(true);
-            
+            try {
+                PacienteVgil paciente = ConexionVgil.recuperaDatosPrsona_Vgil(DNI.getText());
+                if (paciente != null) {
+                    camponombre.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getNombreVgil()));
+                    CampoApellidos.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getApellidosVgil()));
+                    campoTelefono.setText(String.valueOf(paciente.getTelefonoVgil())); // Convertir int a String
+                    campoEmail.setText(paciente.getEmailVgil());
+                    modelo = (DefaultTableModel) HitorialdeconsultasMedicas.getModel();
+                    ConexionVgil.cargarcitasEnfermeria_Vgil(modelo);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
+                    NuevaCitaEnfermeriaVgil cita = new NuevaCitaEnfermeriaVgil(this, rootPaneCheckingEnabled);
+                    cita.setVisible(true);
+
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(MedicoVgil.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    } catch (Exception ex) {
-        Logger.getLogger(MedicoVgil.class.getName()).log(Level.SEVERE, null, ex);
-    }
-}
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -404,45 +405,5 @@ if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton nuevoInforme;
     // End of variables declaration//GEN-END:variables
-
-    String dni, nom, ape, ema;
-    int tel;
-
-    public void registrarConsultaEnfermeria_Vgil() throws Exception {
-
-        if (UtilidadesVgil.campoVacio_Vgil(DNI)) {
-            JOptionPane.showMessageDialog(this, "El DNI es un cammpo es obligatorio por favor");
-        }else if (UtilidadesVgil.validacionLetraDni_Vgil(dni)){
-            JOptionPane.showMessageDialog(this, "El DNI no es valido ");
-        } else if (UtilidadesVgil.campoVacio_Vgil(camponombre)) {
-            JOptionPane.showMessageDialog(this, "El Nombre es un campo obligatorio por favor ");
-        } else if (UtilidadesVgil.campoVacio_Vgil(CampoApellidos)) {
-            JOptionPane.showMessageDialog(this, "El apellido es un campo obligatorio por favor");
-        } else if (UtilidadesVgil.campoVacio_Vgil(campoTelefono)) {
-            JOptionPane.showMessageDialog(this, "El telefono es un campo obligatorio por favor");
-        } else if (UtilidadesVgil.campoVacio_Vgil(campoEmail)) {
-            JOptionPane.showMessageDialog(this, "El correo electronico es un campo obligatorio por favor ");
-        } else {
-            dni = EncriptadoVgil.desencriptar_Vgil(DNI.getText());
-           camponombre.setText(EncriptadoVgil.desencriptar_Vgil(camponombre.getText()));
-            ape = CampoApellidos.getText();
-            tel = Integer.parseInt(campoTelefono.getText());
-            ema = campoEmail.getText();
-
-            PacienteVgil paciente = new PacienteVgil(dni, nom, ape, tel, ema);
-
-            ConexionVgil.conectar_Vgil();
-
-            if (ConexionVgil.nuevaCitaEnfermeria_Vgil(CitaVgil )) {
-
-                JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
-            }
-            ConexionVgil.cerrarConexion_Vgil();
-        }
-
-    }
 
 }

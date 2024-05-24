@@ -137,6 +137,14 @@ public class PacienteVgil {
         return "PacienteVgil{" + "dniVgil=" + dniVgil + ", nombreVgil=" + nombreVgil + ", apellidosVgil=" + apellidosVgil + ", fechaNacimientoVgil=" + fechaNacimientoVgil + ", telefonoVgil=" + telefonoVgil + ", emailVgil=" + emailVgil + ", cpVgil=" + cpVgil + ", sexoVgil=" + sexoVgil + ", tabaquismoVgil=" + tabaquismoVgil + ", consumoalcholVgil=" + consumoalcholVgil + ", antecedentesSaludVgil=" + antecedentesSaludVgil + ", datosSaludGeneralVgil=" + datosSaludGeneralVgil + ", fechaRegistroVgil=" + fechaRegistroVgil + '}';
     }
 
+    public PacienteVgil(String dniVgil, String nombreVgil, String apellidosVgil, int telefonoVgil, int cpVgil) {
+        this.dniVgil = dniVgil;
+        this.nombreVgil = nombreVgil;
+        this.apellidosVgil = apellidosVgil;
+        this.telefonoVgil = telefonoVgil;
+        this.cpVgil = cpVgil;
+    }
+
     
     private String dniVgil;
     private String nombreVgil;

@@ -382,13 +382,19 @@ public class ConexionVgil {
     }
 
     public static boolean registrarPaciente_Vgil(PacienteVgil pa) {
+
         String consultaInsert = "INSERT INTO paciente (dni, nombre, apellidos, fechaNacimiento, telefono, email, cp, sexo, tabaquismo, consumoAlcohol, antecedentesSalud, datosSaludGeneral, fechaRegistro)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement st = conn.prepareStatement(consultaInsert)) {
-            st.setString(1, pa.getDniVgil());
-            st.setString(2, pa.getNombreVgil());
-            st.setString(3, pa.getApellidosVgil());
+            try {
+                st.setString(1, EncriptadoVgil.encriptar_Vgil(pa.getDniVgil()));
+                st.setString(2, EncriptadoVgil.encriptar_Vgil(pa.getNombreVgil()));
+                st.setString(3, EncriptadoVgil.encriptar_Vgil(pa.getApellidosVgil()));
+            } catch (Exception ex) {
+                Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             st.setDate(4, new java.sql.Date(pa.getFechaNacimientoVgil().getTime()));
 
             st.setInt(5, pa.getTelefonoVgil());
@@ -483,6 +489,54 @@ public class ConexionVgil {
             System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    public static void cargarDatosPacientes_Vgil(DefaultTableModel modelo) {
+        try {
+            Object[] datos = new Object[5];
+
+            String consulta = "SELECT dni, nombre, apellidos, telefono, cp FROM paciente ";
+
+            ResultSet rs = conn.createStatement().executeQuery(consulta);
+            while (rs.next()) {
+                try {
+                    datos[0] = EncriptadoVgil.desencriptar_Vgil(rs.getString("dni"));
+                    datos[1] = EncriptadoVgil.desencriptar_Vgil(rs.getString("nombre"));
+                    datos[2] = EncriptadoVgil.desencriptar_Vgil(rs.getString("apellidos"));
+                } catch (Exception ex) {
+                    Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                datos[3] = rs.getString("telefono");
+                datos[4] = rs.getString("cp");
+
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static boolean actualizaDatos(PacienteVgil p, String dni) {
+
+        try {
+            String consultasUpdate = "UPDATE paciente set nombre=?, apellidos=?, cp=? WHERE dni=?";
+
+            try (com.mysql.jdbc.PreparedStatement stat = (com.mysql.jdbc.PreparedStatement) conn.prepareStatement(consultasUpdate)) {
+                stat.setString(1, p.getNombreVgil());
+                stat.setString(2, p.getApellidosVgil());
+                stat.setInt(3, p.getCpVgil());
+                stat.setString(4, dni);
+
+                stat.executeUpdate();
+            }
+            return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionVgil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
     }
 
 }

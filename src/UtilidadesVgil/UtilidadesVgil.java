@@ -151,23 +151,6 @@ public class UtilidadesVgil {
         return calendar.getTime();
 }
     
-     private void datosFila() {
-
-        String contenido = "FECHA DE CONSULTA: " + String.valueOf(tablaConsultas.getValueAt(tablaConsultas.getSelectedRow(), 0));
-        contenido += "\n\nDIAGNÓSTICO:\n " + String.valueOf(tablaConsultas.getValueAt(tablaConsultas.getSelectedRow(), 1));
-        contenido += "\n\nTRATAMIENTO:\n " + String.valueOf(tablaConsultas.getValueAt(tablaConsultas.getSelectedRow(), 2));
-        contenido += "\n\nOBSERVACIONES:\n " + String.valueOf(tablaConsultas.getValueAt(tablaConsultas.getSelectedRow(), 3));
-
-        JTextArea t = new JTextArea(20, 60);
-        t.setText(contenido);
-        t.setEditable(false);
-        t.setLineWrap(true);
-        t.setFocusable(false);
-        t.setAutoscrolls(true);
-        t.setMargin(new Insets(10, 10, 10, 10));
-
-        JOptionPane.showMessageDialog(this, new JScrollPane(t), "INFORME", 1);
-
-    }
+     
     
 }

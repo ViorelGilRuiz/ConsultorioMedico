@@ -7,6 +7,7 @@ package VistasVgil;
 import java.util.Date;
 import UtilidadesVgil.EncriptadoVgil;
 import UtilidadesVgil.UtilidadesVgil;
+import static VistasVgil.MedicoVgil.dni;
 import modeloVgil.PacienteVgil;
 import bbddVgil.ConexionVgil;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
     public NuevoPacienteVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
@@ -35,6 +37,9 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
     private void initComponents() {
 
         jRadioButton6 = new javax.swing.JRadioButton();
+        CampoSexo = new javax.swing.ButtonGroup();
+        campoTabaquismo = new javax.swing.ButtonGroup();
+        campoConsumoAlcohol = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -58,14 +63,14 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
         campoNombre = new javax.swing.JTextField();
         campoTelefefono = new javax.swing.JTextField();
         campocCodigoPostal = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        camHombre = new javax.swing.JRadioButton();
+        campoMujer = new javax.swing.JRadioButton();
+        campoOtro = new javax.swing.JRadioButton();
+        TabaquismoNo = new javax.swing.JRadioButton();
+        AlcholOcasional = new javax.swing.JRadioButton();
+        tabaquismoSi = new javax.swing.JRadioButton();
+        alcholHabitual = new javax.swing.JRadioButton();
+        alcoholNulo = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -168,29 +173,29 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
 
         campocCodigoPostal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
 
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton1.setText("Hombre");
+        camHombre.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        camHombre.setText("Hombre");
 
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton2.setText("Mujer");
+        campoMujer.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        campoMujer.setText("Mujer");
 
-        jRadioButton3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton3.setText("Otro");
+        campoOtro.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        campoOtro.setText("Otro");
 
-        jRadioButton4.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton4.setText("NO");
+        TabaquismoNo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        TabaquismoNo.setText("NO");
 
-        jRadioButton5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton5.setText("OCASIONAL");
+        AlcholOcasional.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        AlcholOcasional.setText("OCASIONAL");
 
-        jRadioButton7.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton7.setText("SI");
+        tabaquismoSi.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        tabaquismoSi.setText("SI");
 
-        jRadioButton8.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton8.setText("HABITUAL");
+        alcholHabitual.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        alcholHabitual.setText("HABITUAL");
 
-        jRadioButton9.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jRadioButton9.setText("NULO");
+        alcoholNulo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        alcoholNulo.setText("NULO");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -236,31 +241,31 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
                                 .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(85, 85, 85)
-                                .addComponent(jRadioButton5)
+                                .addComponent(AlcholOcasional)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton8)
+                                .addComponent(alcholHabitual)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton9))
+                                .addComponent(alcoholNulo))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(camHombre, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton4)))
+                                        .addComponent(TabaquismoNo)))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(campoMujer, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(campoOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(4, 4, 4)
-                                        .addComponent(jRadioButton7)))))
+                                        .addComponent(tabaquismoSi)))))
                         .addGap(19, 19, 19))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,30 +311,34 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(camHombre)
+                    .addComponent(campoMujer)
+                    .addComponent(campoOtro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(alcoholNulo)
+                        .addComponent(alcholHabitual))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton9)
-                            .addComponent(jRadioButton8))
-                        .addGap(11, 11, 11))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton7))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tabaquismoSi, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel12)
+                                .addComponent(TabaquismoNo)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jRadioButton5))
-                        .addGap(11, 11, 11))))
+                            .addComponent(AlcholOcasional))))
+                .addGap(11, 11, 11))
         );
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(0, 153, 153));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salud", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -437,6 +446,10 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      registrarNuevoPaciente_Vgil();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -480,12 +493,22 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton AlcholOcasional;
+    private javax.swing.ButtonGroup CampoSexo;
+    private javax.swing.JRadioButton TabaquismoNo;
+    private javax.swing.JRadioButton alcholHabitual;
+    private javax.swing.JRadioButton alcoholNulo;
     private javax.swing.JTextArea alergiasPaciente;
     private javax.swing.JTextArea antecendentesPaciente;
+    private javax.swing.JRadioButton camHombre;
     private javax.swing.JTextField campoApellidos;
+    private javax.swing.ButtonGroup campoConsumoAlcohol;
     private javax.swing.JTextField campoDNI;
     private javax.swing.JTextField campoEmail;
+    private javax.swing.JRadioButton campoMujer;
     private javax.swing.JTextField campoNombre;
+    private javax.swing.JRadioButton campoOtro;
+    private javax.swing.ButtonGroup campoTabaquismo;
     private javax.swing.JTextField campoTelefefono;
     private javax.swing.JComboBox<String> campocCodigoPostal;
     private com.toedter.calendar.JDateChooser fechaNacimiento;
@@ -509,20 +532,15 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton tabaquismoSi;
     // End of variables declaration//GEN-END:variables
 
     String dni, nombre, apellidos, email;
+    String hombre, mujer, otro;
+    String no, si, ocasional, habitual, nulo;
     String sexo, taba, consumoAlcohol, antecedentes, alergias;
     int tele, cp;
     Date FechaNac;
@@ -542,8 +560,57 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
         } else if (UtilidadesVgil.campoVacio_Vgil(campoEmail)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoEmail);
         } else if (UtilidadesVgil.comboNoSeleccionado_Vgil(campocCodigoPostal)) {
-            UtilidadesVgil.alertaComboNoSeleccionado_Vgil(campocCodigoPostal);
+            UtilidadesVgil.alertaComboNoSeleccionado_Vgil(this, campocCodigoPostal);
+        } else if (UtilidadesVgil.areaVacia_Vgil(antecendentesPaciente)) {
+            UtilidadesVgil.lanzaAlertaAreaVacia_Vgil(alergiasPaciente);
+        } else if (UtilidadesVgil.areaVacia_Vgil(alergiasPaciente)) {
+            UtilidadesVgil.lanzaAlertaAreaVacia_Vgil(alergiasPaciente);
         } else {
+
+            dni = campoDNI.getText();
+            nombre = campoNombre.getText();
+            apellidos = campoApellidos.getText();
+            FechaNac = fechaNacimiento.getDate();
+            tele = Integer.parseInt(campoTelefefono.getText());
+            email = campoEmail.getText();
+            cp = (int) campocCodigoPostal.getSelectedItem();
+            antecedentes = antecendentesPaciente.getText();
+            alergias = alergiasPaciente.getText();
+
+            if (campoMujer.isSelected()) {
+                sexo = "Mujer";
+            } else if (camHombre.isSelected()) {
+                sexo = "Hombre";
+            } else if (campoOtro.isSelected()) {
+                sexo = "Otro";
+            }
+            if (TabaquismoNo.isSelected()) {
+                taba = "No";
+            } else if (tabaquismoSi.isSelected()) {
+                taba = "Sí";
+            }
+
+            if (AlcholOcasional.isSelected()) {
+                consumoAlcohol = "Ocasional";
+            } else if (alcholHabitual.isSelected()) {
+                consumoAlcohol = "Habitual";
+            } else if (alcoholNulo.isSelected()) {
+                consumoAlcohol = "Nulo";
+            }
+
+            PacienteVgil paciente = new PacienteVgil(dni, nombre, apellidos, FechaNac, tele, email, cp, sexo, ocasional, consumoAlcohol, antecedentes, ocasional, FechaNac);
+
+            if (ConexionVgil.registrarPaciente_Vgil(paciente)) {
+
+                JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
+            }
+            ConexionVgil.cerrarConexion_Vgil();
+
         }
+
     }
+
 }

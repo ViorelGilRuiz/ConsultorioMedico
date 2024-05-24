@@ -4,18 +4,28 @@
  */
 package VistasVgil;
 
+import bbddVgil.ConexionVgil;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modeloVgil.CitaVgil;
+import modeloVgil.PacienteVgil;
+
 /**
  *
  * @author oceans
  */
 public class PacientesVgil extends javax.swing.JDialog {
 
+    DefaultTableModel modelo;
     /**
      * Creates new form PacientesVgil
      */
     public PacientesVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ConexionVgil.conectar_Vgil();
+        ConexionVgil.cargarDatosPacientes_Vgil(modelo);
+        ConexionVgil.cerrarConexion_Vgil();
     }
 
     /**
@@ -44,8 +54,8 @@ public class PacientesVgil extends javax.swing.JDialog {
         apellidos = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
         campotelefono = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        codigoPostal = new javax.swing.JComboBox<>();
+        botonActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -141,7 +151,7 @@ public class PacientesVgil extends javax.swing.JDialog {
                             .addComponent(campotelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                             .addComponent(apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                             .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(codigoPostal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -166,11 +176,16 @@ public class PacientesVgil extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codigoPostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Actualizar");
+        botonActualizar.setText("Actualizar");
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,12 +198,12 @@ public class PacientesVgil extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91))
         );
         jPanel2Layout.setVerticalGroup(
@@ -201,7 +216,7 @@ public class PacientesVgil extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jButton1)
+                .addComponent(botonActualizar)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -226,6 +241,10 @@ public class PacientesVgil extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,10 +290,10 @@ public class PacientesVgil extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidos;
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JTextField campoDNI;
     private javax.swing.JTextField campotelefono;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> codigoPostal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -292,6 +311,43 @@ public class PacientesVgil extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
 
+ public void cargardatosFila() {
 
+        int fila = listadoPacientes.getSelectedRow();
+
+        campoDNI.setText((String) listadoPacientes.getValueAt(fila, 0));
+        nombre.setText((String) listadoPacientes.getValueAt(fila, 1));
+        apellidos.setText((String) listadoPacientes.getValueAt(fila, 2));
+        campotelefono.setText((String) listadoPacientes.getValueAt(fila, 3));
+        codigoPostal.setSelectedItem((String) listadoPacientes.getValueAt(fila, 4));
+
+        campoDNI.setEditable(true);
+        nombre.setEnabled(true);
+        apellidos.setEnabled(true);
+        campotelefono.setEnabled(true);
+        botonActualizar.setEnabled(true);
+
+    }
+
+    public void actualizar() {
+
+        PacientesVgil paciente = new PacienteVgil(
+                nombre.getText(),
+                apellidos.getText(),                
+                Integer.parseInt(codigoPostal.getSelectedItem().toString())
+        );
+
+        ConexionVgil.conectar_Vgil();
+
+        if (ConexionVgil.actualizar(p, campoDNI.getText())) {
+            JOptionPane.showMessageDialog(this, "Datos actualizados");
+            modelo.setRowCount(0);
+        }
+
+        ConexionVgil.actualizaDatos(p);
+
+        ConexionVgil.cerrarConexion_Vgil();
+
+    }
 
 }
