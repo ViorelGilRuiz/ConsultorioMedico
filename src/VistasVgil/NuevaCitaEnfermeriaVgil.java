@@ -187,6 +187,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         nuevaCita_Vgil();
        
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -252,6 +253,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     String dni, nom;
     Date fecha;
     Double hora;
+    String datos;
 
     public void nuevaCita_Vgil() {
 
@@ -276,7 +278,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
                 }
 
                 try {
-                    hora = Double.parseDouble(campoHora.getSelectedItem().toString());
+                    hora = Double.valueOf(campoHora.getSelectedItem().toString());
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(this, "Formato de hora no válido. Por favor, selecciona una hora correcta.");
                     return;

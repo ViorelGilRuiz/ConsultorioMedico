@@ -266,14 +266,14 @@ public class ConexionVgil {
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+
     }
 
     public static boolean registrarCitaMedica_Vgil(ConsultaEnfermeriaVgil consulta) {
 
         String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta,codigoFacultativo)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        String salud = "INSERT INTO enfermeria (tensionMax, tensionMin, glucosa, peso ) " + "VALUES (?,?,?,?)";
 
         try {
             PreparedStatement st = conn.prepareStatement(consultaInsert);
@@ -348,18 +348,17 @@ public class ConexionVgil {
          * Consulta para el registro de citasEnfermeria con el nombre y el dni
          * del paciente encriptados
          */
-        String consultaInsert = "INSERT INTO consultas (dniPaciente, fechaConsulta, maxima, minima, glucosa, peso, codigoFacultativo)"
-                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String consultaInsert = "INSERT INTO consultas (dniPaciente,  tensionMax, tensionMin, glucosa, peso )"
+                + " VALUES (?, ?, ?, ?, ?,)";
 
         try {
             PreparedStatement st = conn.prepareStatement(consultaInsert);
             st.setString(1, cita.getDniPacienteVgil());
-            st.setDate(2, (java.sql.Date) new Date(cita.getFechaConsultaVgil().getTime())); // Convertir java.util.Date a java.sql.Date
-            st.setDouble(3, cita.getMaximaVgil());
-            st.setDouble(4, cita.getMinimaVgil());
-            st.setInt(5, cita.getGlucosaVgil());
-            st.setDouble(6, cita.getPesoVgil());
-            st.setInt(7, cita.getCodigoFacultativoVgil());
+            st.setDouble(2, cita.getMaximaVgil());
+            st.setDouble(3, cita.getMinimaVgil());
+            st.setInt(4, cita.getGlucosaVgil());
+            st.setDouble(5 , cita.getPesoVgil());
+           
 
             st.execute();
             return true;
@@ -390,7 +389,6 @@ public class ConexionVgil {
             cerrarConexion_Vgil();
         }
     }
-    
 
     public static boolean registrarPaciente_Vgil(PacienteVgil pa) {
 

@@ -37,6 +37,8 @@ public class MedicoVgil extends javax.swing.JFrame {
         initComponents();
         
         
+        
+        
     }
 
     /**
@@ -108,6 +110,7 @@ public class MedicoVgil extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setEnabled(false);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DNI Paciente");
@@ -138,11 +141,18 @@ public class MedicoVgil extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Email");
 
+        campoNombre.setEnabled(false);
         campoNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNombreActionPerformed(evt);
             }
         });
+
+        campoApellidos.setEnabled(false);
+
+        campoTelefono.setEnabled(false);
+
+        campoEmail.setEnabled(false);
 
         jButton3.setText("Nuevo Informe ");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -410,6 +420,7 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
 
     String  nom, ape, ema;
     int tele;
+    
 
     public void consultaMedica_Vgil() {
 

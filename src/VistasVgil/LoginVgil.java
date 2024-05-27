@@ -221,6 +221,19 @@ public class LoginVgil extends javax.swing.JFrame {
             contrasenya = new String(campoContraseña.getPassword());
             String passencript;
             
+                     // Verificar longitud del nombre de usuario y contraseña
+            if (usuario.length() > 30) {
+                JOptionPane.showMessageDialog(this, "El nombre de usuario no puede tener más de 30 caracteres.");
+                campoUsuario.setText("");
+                return;
+            }
+
+            if (contrasenya.length() > 30) {
+                JOptionPane.showMessageDialog(this, "La contraseña no puede tener más de 30 caracteres.");
+                campoContraseña.setText("");
+                return;
+            }
+            
             passencript = EncriptadoVgil.encriptar_Vgil(contrasenya);
             
             
