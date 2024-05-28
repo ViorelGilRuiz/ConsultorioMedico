@@ -24,10 +24,10 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
     public NuevoPacienteVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         ConexionVgil.conectar_Vgil();
         ConexionVgil.cargarCombocp_Vgil(campocCodigoPostal);
-        
+
     }
 
     /**
@@ -178,27 +178,35 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
 
         camHombre.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         camHombre.setText("Hombre");
+        camHombre.setName("hombre"); // NOI18N
 
         campoMujer.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         campoMujer.setText("Mujer");
+        campoMujer.setName("Mujer"); // NOI18N
 
         campoOtro.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         campoOtro.setText("Otro");
+        campoOtro.setName("otro"); // NOI18N
 
         TabaquismoNo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         TabaquismoNo.setText("NO");
+        TabaquismoNo.setName("tabaquismo si"); // NOI18N
 
         AlcholOcasional.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         AlcholOcasional.setText("OCASIONAL");
+        AlcholOcasional.setName("consumoOcasional"); // NOI18N
 
         tabaquismoSi.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         tabaquismoSi.setText("SI");
+        tabaquismoSi.setName("tabaquismosi"); // NOI18N
 
         alcholHabitual.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         alcholHabitual.setText("HABITUAL");
+        alcholHabitual.setName("consumoAlcholHabitual"); // NOI18N
 
         alcoholNulo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         alcoholNulo.setText("NULO");
+        alcoholNulo.setName("consumoAlacholNulo"); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -450,7 +458,7 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      registrarNuevoPaciente_Vgil();
+        registrarNuevoPaciente_Vgil();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -576,22 +584,22 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
             FechaNac = fechaNacimiento.getDate();
             tele = Integer.parseInt(campoTelefefono.getText());
             email = campoEmail.getText();
-            int cp = Integer.parseInt((String) campocCodigoPostal.getSelectedItem());            
-            
+            int cp = Integer.parseInt((String) campocCodigoPostal.getSelectedItem());
+
             antecedentes = antecendentesPaciente.getText();
             alergias = alergiasPaciente.getText();
 
             if (campoMujer.isSelected()) {
-                sexo = "Mujer";
+                sexo = "M";
             } else if (camHombre.isSelected()) {
-                sexo = "Hombre";
+                sexo = "H";
             } else if (campoOtro.isSelected()) {
-                sexo = "Otro";
+                sexo = "OTROS";
             }
             if (TabaquismoNo.isSelected()) {
-                taba = "No";
+                taba = "NO";
             } else if (tabaquismoSi.isSelected()) {
-                taba = "Sí";
+                taba = "SI";
             }
 
             if (AlcholOcasional.isSelected()) {
@@ -602,8 +610,8 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
                 consumoAlcohol = "Nulo";
             }
 
-            PacienteVgil paciente = new PacienteVgil(dni, nombre, apellidos, FechaNac, tele, email, cp, sexo, ocasional, consumoAlcohol, antecedentes, ocasional, FechaNac);
-
+            PacienteVgil paciente = new PacienteVgil(dni, nombre, apellidos, FechaNac, tele, email, cp, sexo, taba, consumoAlcohol, antecedentes, alergias, FechaNac);
+            ConexionVgil.conectar_Vgil();
             if (ConexionVgil.registrarPaciente_Vgil(paciente)) {
 
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
@@ -611,10 +619,9 @@ public class NuevoPacienteVgil extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
             }
-            ConexionVgil.cerrarConexion_Vgil();
 
         }
-
+        ConexionVgil.cerrarConexion_Vgil();
     }
 
 }

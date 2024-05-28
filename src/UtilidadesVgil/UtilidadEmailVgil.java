@@ -26,10 +26,10 @@ public class UtilidadEmailVgil {
 
             email.setHostName("smtp.hostinger.com");
             email.setSmtpPort(465);
-            email.setAuthenticator(new DefaultAuthenticator("noreply@reynaldomd.com", "2024-Daw"));
+            email.setAuthenticator(new DefaultAuthenticator("consultorio@reynaldomd.com", "2024-Consultorio"));
             email.setSSLOnConnect(true);
             email.setCharset("UTF-8");
-            email.setFrom("noreply@reynaldomd.com");
+            email.setFrom("consultorio@reynaldomd.com");
             email.setSubject("Correo enviado automáticamente");
 
             email.setMsg(datos.toString());

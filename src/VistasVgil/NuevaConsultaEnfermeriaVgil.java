@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package VistasVgil;
+
 import bbddVgil.ConexionVgil;
 import UtilidadesVgil.UtilidadesVgil;
 import javax.swing.JOptionPane;
 import modeloVgil.CitaVgil;
 import modeloVgil.ConsultaEnfermeriaVgil;
 import modeloVgil.ConsultaEnfermeriaVgil;
+import VistasVgil.EnfermeriaVgil;
+import java.util.Date;
 
 /**
  *
@@ -22,6 +25,7 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
     public NuevaConsultaEnfermeriaVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        campoDNI.setText(dni);
     }
 
     /**
@@ -51,7 +55,7 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         campoNiveldeGlucosa = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -199,7 +203,12 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Cancelar");
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -219,7 +228,7 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
                         .addGap(157, 157, 157)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(123, 123, 123)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -238,7 +247,7 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botonCancelar))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -262,8 +271,12 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       nuevaConsultaEnfermeria_Vgil();
+        nuevaConsultaEnfermeria_Vgil();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        cancelarFormulario();
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -308,13 +321,13 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCancelar;
     private javax.swing.JTextField campoDNI;
     private javax.swing.JTextField campoMaxima;
     private javax.swing.JTextField campoMinima;
     private javax.swing.JTextField campoNiveldeGlucosa;
     private javax.swing.JTextField campoPeso;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -331,39 +344,46 @@ public class NuevaConsultaEnfermeriaVgil extends javax.swing.JDialog {
 
     String dni;
     Double max, min, glu, pes;
+    int colegiado;
+    Date fecha = new Date();
 
     void nuevaConsultaEnfermeria_Vgil() {
-
         if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
-            UtilidadesVgil.campoVacio_Vgil(campoDNI);
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
         } else if (UtilidadesVgil.campoVacio_Vgil(campoMaxima)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoMaxima);
         } else if (UtilidadesVgil.campoVacio_Vgil(campoMinima)) {
-            UtilidadesVgil.campoVacio_Vgil(campoMinima);
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoMinima);
         } else if (UtilidadesVgil.campoVacio_Vgil(campoNiveldeGlucosa)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoNiveldeGlucosa);
         } else if (UtilidadesVgil.campoVacio_Vgil(campoPeso)) {
             UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoPeso);
         } else {
-
             dni = campoDNI.getText();
             max = Double.valueOf(campoMaxima.getText());
             min = Double.valueOf(campoMinima.getText());
             glu = Double.valueOf(campoNiveldeGlucosa.getText());
             pes = Double.valueOf(campoPeso.getText());
-            
+            Date fechaConsulta = new Date();
+            colegiado = Integer.parseInt(LoginVgil.datosPersona_Vgil[1]);
+
             ConexionVgil.conectar_Vgil();
-            
-            ConsultaEnfermeriaVgil informe = new ConsultaEnfermeriaVgil(dni, 0, 0, HEIGHT, 0);
-            
-         if (ConexionVgil.registrarCitaEnfermeria_Vgil(informe)) {
-            ConexionVgil.conectar_Vgil();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al crear un nuevo informe ");
-        }
+            ConsultaEnfermeriaVgil cg = new ConsultaEnfermeriaVgil(dni, fecha, max, min, glu, pes, colegiado);
+
+            if (ConexionVgil.registrarConsultasEnfermeria_Vil(cg)) {
+                JOptionPane.showMessageDialog(null, "Informe creado con éxito");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al crear un nuevo informe");
+            }
             ConexionVgil.cerrarConexion_Vgil();
-            
         }
     }
 
+    public void cancelarFormulario() {
+        campoDNI.setText("");
+        campoMaxima.setText("");
+        campoMinima.setText("");
+        campoNiveldeGlucosa.setText("");
+        campoPeso.setText("");
+    }
 }

@@ -7,6 +7,9 @@ import UtilidadesVgil.UtilidadEmailVgil;
 import UtilidadesVgil.EncriptadoVgil;
 import java.util.Date;
 import UtilidadesVgil.UtilidadesVgil;
+import static VistasVgil.EnfermeriaVgil.ape;
+import static VistasVgil.EnfermeriaVgil.dni;
+import static VistasVgil.EnfermeriaVgil.nom;
 import bbddVgil.ConexionVgil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +28,10 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     public NuevaCitaEnfermeriaVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        
+        campoDNI.setText(dni);
+        campoNombre.setText(nom + ""+ ape );
     }
 
     /**
@@ -97,7 +104,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Hora");
 
-        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "9:00", "9.30", "10.00", "10.30", "11.00", "11.30", "12.00", "12.30", "13.00", "13.30", "14.00", " " }));
+        campoHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "9.00", "9.30", "10.00", "10.30", "11.00", "11.30", "12.00", "12.30", "13.00", "13.30", "14.00", " " }));
 
         jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +257,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 
-    String dni, nom;
+ 
     Date fecha;
     Double hora;
     String datos;
@@ -269,7 +276,7 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
 
             try {
                 String dni = EncriptadoVgil.encriptar_Vgil(campoDNI.getText());
-                String nombre = EncriptadoVgil.encriptar_Vgil(campoNombre.getText());
+                String nom = EncriptadoVgil.encriptar_Vgil(campoNombre.getText());
                 switch (campoFecha.getSelectedItem().toString()) {
                     case "Una Semana" -> fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 7);
                     case "Dos Semanas" -> fecha = UtilidadesVgil.sumarRestarDiasFecha_Vgil(new Date(), 14);
@@ -285,10 +292,10 @@ public class NuevaCitaEnfermeriaVgil extends javax.swing.JDialog {
                 }
 
                 // Crear una nueva cita
-                CitaVgil cita = new CitaVgil(dni, nombre, fecha, hora);
+                CitaVgil cita = new CitaVgil(dni, nom, fecha, hora);
                 ConexionVgil.conectar_Vgil();
 
-                if (ConexionVgil.registrarCitaMedica_Vgil(cita)) {
+                if (ConexionVgil.nuevaCitaEnfermeria_Vgil(cita)) {
                     JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");

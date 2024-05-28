@@ -285,13 +285,14 @@ public class NuevaCitaVgil extends javax.swing.JDialog {
             ConexionVgil.conectar_Vgil();
 
             if (ConexionVgil.nuevaCitaMedica_Vgil(cita)) {
-
+                ConexionVgil.cerrarConexion_Vgil();
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente.");
-
+                UtilidadEmailVgil.enviaremailsimple(datos);
             } else {
                 JOptionPane.showMessageDialog(this, "Error al realizar el registro, intentalo más tarde.");
             }
             ConexionVgil.cerrarConexion_Vgil();
+            this.dispose();
 
         }
     }

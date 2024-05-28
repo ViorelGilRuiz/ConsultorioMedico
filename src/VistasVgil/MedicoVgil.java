@@ -22,23 +22,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author oceans
  */
 public class MedicoVgil extends javax.swing.JFrame {
+
     public static String dni;
     DefaultTableModel modelo;
+
     /**
      * Creates new form EnfermeriaVgil
      */
     public MedicoVgil() {
         initComponents();
-        
-        
-        
-        
+
     }
 
     /**
@@ -326,34 +324,34 @@ public class MedicoVgil extends javax.swing.JFrame {
     }//GEN-LAST:event_campoNombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    ConexionVgil.conectar_Vgil();
+        ConexionVgil.conectar_Vgil();
 
-if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
-    UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDni);
-} else if (!UtilidadesVgil.confirmaacionDNI_Vgil(campoDni)) {
-    JOptionPane.showMessageDialog(this, "El DNI no es válido, introduzca uno válido por favor");
-} else {
-    try {
-        PacienteVgil paciente = ConexionVgil.recuperaDatosPrsona_Vgil(campoDni.getText());
-        if (paciente != null) {
-            dni = campoDni.getText();
-            campoNombre.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getNombreVgil()));
-            campoApellidos.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getApellidosVgil()));
-            campoTelefono.setText(String.valueOf(paciente.getTelefonoVgil())); // Convertir int a String
-            campoEmail.setText(paciente.getEmailVgil());
-            modelo = (DefaultTableModel) tabla.getModel();
-            ConexionVgil.cargarTablaConsultasMedicas_Vgil(modelo, dni);
-            datosFila();
+        if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
+            UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDni);
+        } else if (!UtilidadesVgil.confirmaacionDNI_Vgil(campoDni)) {
+            JOptionPane.showMessageDialog(this, "El DNI no es válido, introduzca uno válido por favor");
         } else {
-            JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
-           NuevoPacienteVgil p = new NuevoPacienteVgil(this, rootPaneCheckingEnabled);
-            p.setVisible(true);
-            
+            try {
+                PacienteVgil paciente = ConexionVgil.recuperaDatosPrsona_Vgil(campoDni.getText());
+                if (paciente != null) {
+                    dni = campoDni.getText();
+                    campoNombre.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getNombreVgil()));
+                    campoApellidos.setText(EncriptadoVgil.desencriptar_Vgil(paciente.getApellidosVgil()));
+                    campoTelefono.setText(String.valueOf(paciente.getTelefonoVgil())); // Convertir int a String
+                    campoEmail.setText(paciente.getEmailVgil());
+                    modelo = (DefaultTableModel) tabla.getModel();
+                    ConexionVgil.cargarTablaConsultasMedicas_Vgil(modelo, dni);
+                    datosFila();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
+                    NuevoPacienteVgil p = new NuevoPacienteVgil(this, rootPaneCheckingEnabled);
+                    p.setVisible(true);
+
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(MedicoVgil.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    } catch (Exception ex) {
-        Logger.getLogger(MedicoVgil.class.getName()).log(Level.SEVERE, null, ex);
-    }
-}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -418,9 +416,8 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 
-    String  nom, ape, ema;
+    String nom, ape, ema;
     int tele;
-    
 
     public void consultaMedica_Vgil() {
 
@@ -440,13 +437,16 @@ if (UtilidadesVgil.campoVacio_Vgil(campoDni)) {
             ape = campoApellidos.getText();
             tele = Integer.parseInt(campoTelefono.getText());
             ema = campoEmail.getText();
-            
+
             PacienteVgil paciente = new PacienteVgil(nom, ape, tele, ema);
-        
+
             ConexionVgil.conectar_Vgil();
+            
+            
         }
     }
-private void datosFila() {
+
+    private void datosFila() {
 
         String contenido = "FECHA DE CONSULTA: " + String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 0));
         contenido += "\n\nDIAGNÓSTICO:\n " + String.valueOf(tabla.getValueAt(tabla.getSelectedRow(), 1));
@@ -465,4 +465,3 @@ private void datosFila() {
 
     }
 }
-

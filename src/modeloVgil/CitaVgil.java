@@ -5,12 +5,14 @@
 package modeloVgil;
 
 import java.util.Date;
-
+import java.text.SimpleDateFormat;
 /**
  *
  * @author oceans
  */
 public class CitaVgil {
+    
+     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public CitaVgil(String dniPacienteVgil, String nombreVgil, Date diaVgil, double horaVgil) {
         this.dniPacienteVgil = dniPacienteVgil;
@@ -52,12 +54,17 @@ public class CitaVgil {
     }
 
     @Override
-    public String toString() {
-        return "CitaVgil{" + "dniPacienteVgil=" + dniPacienteVgil 
-                + ", nombreVgil=" + nombreVgil + ", diaVgil="
-                + diaVgil + ", horaVgil=" + horaVgil + '}';
+public String toString() {
+        return "<h1>--------------------------- DATOS DE LA CITA ---------------------------</h1>" 
+                + "\nDni del paciente: <b>" + dniPacienteVgil + "</b>" 
+                +"\nNombre: <b>" + nombreVgil + "</b>"
+                + "\nDia: <b>" + sdf.format(diaVgil) + "</b>"
+                + "\nHora: <b>" + horaVgil + "</b>"
+                + "<h2>---------------------------------------------------------</h2>"
+                + "<br/><br/><img src =http://reynaldomd.com/firmacorreo/firmacorreo.png>"
+                + "<br/><br/> Has recibido este email porque has solicitado una cita en el centro médico. Por favot, no responda a este correo electrónico: ha sido generado automáticamente.";
     }
-    
+
     String dniPacienteVgil;
     String nombreVgil;
     Date diaVgil;

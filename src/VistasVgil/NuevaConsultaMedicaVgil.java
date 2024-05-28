@@ -24,7 +24,7 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         campoDNI.setText(dni);
-        
+
     }
 
     /**
@@ -89,7 +89,7 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("DNI CLiente");
+        jLabel3.setText("DNI Paciente");
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Diagnóstico");
@@ -131,17 +131,18 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(20, 20, 20)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(32, 32, 32)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(19, 19, 19)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(32, 32, 32)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(19, 19, 19))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addComponent(campoDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
@@ -203,7 +204,7 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        registar();
+        registar_Vgil();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -274,31 +275,32 @@ public class NuevaConsultaMedicaVgil extends javax.swing.JDialog {
     Date fecha = new Date();
     int colegiado;
 
-    public void registar() {
-
+    public void registar_Vgil() {
         if (UtilidadesVgil.areaVacia_Vgil(campoDiagnostico)) {
-            JOptionPane.showMessageDialog(this, "campo obligatorio");
-        } else if (UtilidadesVgil.areaVacia_Vgil(campoObservaciones)) {
-            JOptionPane.showMessageDialog(this, "campo abligatorio");
+            JOptionPane.showMessageDialog(this, "El campo diagnóstico es obligatorio");
         } else if (UtilidadesVgil.areaVacia_Vgil(campoTratamiento)) {
-            JOptionPane.showMessageDialog(this, "campo obligatorio");
+            JOptionPane.showMessageDialog(this, "El campo tratamiento es obligatorio");
+        } else if (UtilidadesVgil.areaVacia_Vgil(campoObservaciones)) {
+            JOptionPane.showMessageDialog(this, "El campo observaciones es obligatorio");
         } else {
-            String dnii = campoDNI.getText();
+            String dni = campoDNI.getText();
             diag = campoDiagnostico.getText();
             trat = campoTratamiento.getText();
             obser = campoObservaciones.getText();
             colegiado = Integer.parseInt(LoginVgil.datosPersona_Vgil[1]);
 
-            ConsultaVgil cg = new ConsultaVgil(dnii, fecha, diag, trat, obser, colegiado);
+            // Crear la instancia de ConsultaVgil con los parámetros correctos
+            ConsultaVgil cg = new ConsultaVgil(dni, fecha, diag, trat, obser, colegiado);
+
             ConexionVgil.conectar_Vgil();
 
-            if (ConexionVgil.registrarConsultaMedica_Informe_Vgil(cg)) {
+            if (ConexionVgil.registrarConsultaMedicaInforme_Vgil(cg)) {
                 JOptionPane.showMessageDialog(this, "Registro realizado correctamente");
             } else {
                 JOptionPane.showMessageDialog(this, "Error en la acción de registro. Inténtelo más tarde o póngase en contacto con el administrador del sistema");
             }
             ConexionVgil.cerrarConexion_Vgil();
         }
-
     }
+
 }

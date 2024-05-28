@@ -8,6 +8,9 @@ import bbddVgil.ConexionVgil;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modeloVgil.PacienteVgil;
+import UtilidadesVgil.UtilidadesVgil;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -19,13 +22,31 @@ public class PacientesVgil extends javax.swing.JDialog {
 
     /**
      * Creates new form PacientesVgil
+     *
+     * @param parent
+     * @param modal
      */
     public PacientesVgil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ConexionVgil.conectar_Vgil();
+        ConexionVgil.cargarCombocp_Vgil(codigoPostal);
+
+        // Inicializa el modelo de la tabla con los nombres de las columnas
+        DefaultTableModel modelo = new DefaultTableModel(new Object[]{"DNI", "Nombre", "Apellidos", "Teléfono", "CP"}, 0);
+
+        // Cargar datos en el modelo
         ConexionVgil.cargarDatosPacientes_Vgil(modelo);
+
+        // Asignar el modelo a la tabla
+        listadoPacientes.setModel(modelo);
         ConexionVgil.cerrarConexion_Vgil();
+        listadoPacientes.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            cargardatosFila();
+        }
+    });
     }
 
     /**
@@ -113,6 +134,8 @@ public class PacientesVgil extends javax.swing.JDialog {
         jLabel4.setText("DNI");
         jLabel4.setToolTipText("");
 
+        campoDNI.setEnabled(false);
+
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nombre");
         jLabel5.setToolTipText("");
@@ -128,6 +151,12 @@ public class PacientesVgil extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("CP");
         jLabel8.setToolTipText("");
+
+        apellidos.setEnabled(false);
+
+        nombre.setEnabled(false);
+
+        campotelefono.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -243,7 +272,7 @@ public class PacientesVgil extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
-        // TODO add your handling code here:
+      actualizarPaciente();
     }//GEN-LAST:event_botonActualizarActionPerformed
 
     /**
@@ -310,38 +339,51 @@ public class PacientesVgil extends javax.swing.JDialog {
     private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 
-    public void cargardatosFila() {
+    String dni;
+    String nom;
+    String ape;
+    int tele, codpos;
 
-        int fila = listadoPacientes.getSelectedRow();
+    public void actualizarPaciente() {
+    if (UtilidadesVgil.campoVacio_Vgil(campoDNI)) {
+        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campoDNI);
+    } else if (!UtilidadesVgil.validacionLetraDni_Vgil(campoDNI)) {
+        UtilidadesVgil.mostrarAlertaDNIFormatoInvalido_Vgil();
+    } else if (UtilidadesVgil.campoVacio_Vgil(nombre)) {
+        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(nombre);
+    } else if (UtilidadesVgil.campoVacio_Vgil(apellidos)) {
+        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(apellidos);
+    } else if (UtilidadesVgil.campoVacio_Vgil(campotelefono)) {
+        UtilidadesVgil.lanzaAlertaCampoVacio_Vgil(campotelefono);
+    } else if (UtilidadesVgil.rangotel_Vgil(tele)) {
+        UtilidadesVgil.lanzarAlertaFormatoDeTelefonoIncorrecto_Vgil();
+    } else if (codigoPostal.getSelectedIndex() == 0) {
+        JOptionPane.showMessageDialog(this, "El campo código postal debe ser seleccionado");
+    } else {
+        ConexionVgil.conectar_Vgil();
 
-        campoDNI.setText((String) listadoPacientes.getValueAt(fila, 0));
-        nombre.setText((String) listadoPacientes.getValueAt(fila, 1));
-        apellidos.setText((String) listadoPacientes.getValueAt(fila, 2));
-        campotelefono.setText((String) listadoPacientes.getValueAt(fila, 3));
-        codigoPostal.setSelectedItem((String) listadoPacientes.getValueAt(fila, 4));
+        dni = campoDNI.getText();
+        nom = nombre.getText();
+        ape = apellidos.getText();
+        tele = Integer.parseInt(campotelefono.getText());
+        codpos = Integer.parseInt(codigoPostal.getSelectedItem().toString());
 
-        campoDNI.setEditable(true);
-        nombre.setEnabled(true);
-        apellidos.setEnabled(true);
-        campotelefono.setEnabled(true);
-        botonActualizar.setEnabled(true);
-
-    }
-
-    public void actualizar() {
         try {
             PacienteVgil p = new PacienteVgil(
-                    campoDNI.getText(),
-                    nombre.getText(),
-                    apellidos.getText(),
-                    Integer.parseInt(campotelefono.getText()), // Convertir teléfono a int
-                    Integer.parseInt(codigoPostal.getSelectedItem().toString()) // Convertir código postal a int
+                campoDNI.getText(),
+                nombre.getText(),
+                apellidos.getText(),
+                Integer.parseInt(campotelefono.getText()), // Convertir teléfono a int
+                Integer.parseInt(codigoPostal.getSelectedItem().toString()) // Convertir código postal a int
             );
             ConexionVgil.conectar_Vgil();
 
             if (ConexionVgil.actualizaDatos(p, campoDNI.getText())) {
                 JOptionPane.showMessageDialog(this, "Datos actualizados");
                 modelo.setRowCount(0); // Asegúrate de que 'modelo' está correctamente inicializado
+                ConexionVgil.actualizaDatos(p, dni);
+                ConexionVgil.cerrarConexion_Vgil();
+                listadoPacientes.clearSelection();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al actualizar los datos");
             }
@@ -352,8 +394,25 @@ public class PacientesVgil extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage());
         } finally {
             ConexionVgil.cerrarConexion_Vgil();
-
         }
+    }
+}
 
+    public void cargardatosFila() {
+        int fila = listadoPacientes.getSelectedRow();
+
+        if (fila != -1) { // Asegúrate de que se ha seleccionado una fila
+            campoDNI.setText((String) listadoPacientes.getValueAt(fila, 0));
+            nombre.setText((String) listadoPacientes.getValueAt(fila, 1));
+            apellidos.setText((String) listadoPacientes.getValueAt(fila, 2));
+            campotelefono.setText((String) listadoPacientes.getValueAt(fila, 3));
+            codigoPostal.setSelectedItem((String) listadoPacientes.getValueAt(fila, 4));
+
+            campoDNI.setEditable(true);
+            nombre.setEnabled(true);
+            apellidos.setEnabled(true);
+            campotelefono.setEnabled(true);
+            botonActualizar.setEnabled(true);
+        }
     }
 }

@@ -23,7 +23,12 @@ import modeloVgil.PacienteVgil;
 public class EnfermeriaVgil extends javax.swing.JFrame {
 
     DefaultTableModel modelo;
-
+    
+    public static String dni;
+    public static String nom;
+    public static String ape;
+    public static String email;
+    
     /**
      * Creates new form EnfermeriaVgil
      */
@@ -137,12 +142,16 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Email");
 
+        camponombre.setEnabled(false);
         camponombre.setName("Nombre"); // NOI18N
 
+        CampoApellidos.setEnabled(false);
         CampoApellidos.setName("Apellidos"); // NOI18N
 
+        campoTelefono.setEnabled(false);
         campoTelefono.setName("Teléfono"); // NOI18N
 
+        campoEmail.setEnabled(false);
         campoEmail.setName("Correo Electrónico"); // NOI18N
 
         nuevoInforme.setText("Nuevo Informe ");
@@ -334,13 +343,17 @@ public class EnfermeriaVgil extends javax.swing.JFrame {
                     ConexionVgil.cargarcitasEnfermeria_Vgil(modelo);
                 } else {
                     JOptionPane.showMessageDialog(this, "No se encontró un paciente con el DNI proporcionado.");
-                    NuevaCitaEnfermeriaVgil cita = new NuevaCitaEnfermeriaVgil(this, rootPaneCheckingEnabled);
-                    cita.setVisible(true);
+                    NuevoPacienteVgil p = new NuevoPacienteVgil(this, rootPaneCheckingEnabled);
+                    p.setVisible(true);
 
                 }
             } catch (Exception ex) {
                 Logger.getLogger(MedicoVgil.class.getName()).log(Level.SEVERE, null, ex);
             }
+            dni = DNI.getText();
+            nom = camponombre.getText();
+            ape = CampoApellidos.getText();
+            email = campoEmail.getText();
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

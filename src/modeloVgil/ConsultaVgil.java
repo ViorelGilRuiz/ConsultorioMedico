@@ -75,19 +75,19 @@ public class ConsultaVgil {
     }
 
 
+
+
+
+
     private String dniPacienteVgil;
     private Date fechaConsultaVgil;
     private String diagnosticoVgil;
     private String tratamientoVgil;
     private String observacionesVgil;
     private int codigoFacultativoVgil;
+   
 
-    public ConsultaVgil(String dniPacienteVgil, String diagnosticoVgil, String tratamientoVgil, String observacionesVgil) {
-        this.dniPacienteVgil = dniPacienteVgil;
-        this.diagnosticoVgil = diagnosticoVgil;
-        this.tratamientoVgil = tratamientoVgil;
-        this.observacionesVgil = observacionesVgil;
-    }
+
     
     
     
